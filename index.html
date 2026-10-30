@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prospector La Ligua | Móvil</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card-contacted {
+            opacity: 0.55;
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+        }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 pb-20">
+
+    <!-- TOP MOBILE BAR -->
+    <div class="sticky top-0 z-40 bg-slate-900 text-white px-4 py-3 shadow-md border-b border-slate-800">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white text-sm shadow">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                    <h1 class="text-sm font-extrabold leading-tight text-white">Prospectos La Ligua</h1>
+                    <p class="text-[10px] text-slate-400">Venta de Páginas Web Locales</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs">
+                <span id="counter-pending" class="bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded-full text-[11px] border border-emerald-500/30">
+                    12 listos
+                </span>
+                <span id="counter-done" class="bg-slate-800 text-slate-400 font-medium px-2 py-0.5 rounded-full text-[11px]">
+                    0 enviados
+                </span>
+            </div>
+        </div>
+
+        <!-- QUICK DEMOS SHORTCUTS -->
+        <div class="mt-2.5 pt-2 border-t border-slate-800 flex gap-2 overflow-x-auto hide-scroll">
+            <a href="https://pagina3.github.io/muestra-restaurante/" target="_blank" class="whitespace-nowrap bg-red-950/80 hover:bg-red-900 border border-red-700/60 text-red-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                <i class="fa-solid fa-utensils text-red-400"></i> Demo Restaurante <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+            </a>
+            <a href="https://pagina3.github.io/muestra-cabana/" target="_blank" class="whitespace-nowrap bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-700/60 text-emerald-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                <i class="fa-solid fa-house text-emerald-400"></i> Demo Cabañas <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-md mx-auto px-3.5 pt-3">
+
+        <!-- SEARCH INPUT -->
+        <div class="relative mb-3">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input type="text" id="searchInput" oninput="filtrarProspectos()" placeholder="Buscar negocio, comuna o rubro..." 
+                   class="w-full bg-white border border-slate-300 rounded-2xl pl-9 pr-8 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-600 shadow-sm">
+            <button onclick="limpiarBusqueda()" id="clearBtn" class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+
+        <!-- COMUNA FILTER PILLS -->
+        <div class="flex gap-1.5 overflow-x-auto hide-scroll pb-1 mb-2">
+            <button onclick="filtrarComuna('todas')" class="comuna-pill active whitespace-nowrap bg-slate-900 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-sm">
+                Todas
+            </button>
+            <button onclick="filtrarComuna('La Ligua')" class="comuna-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                📍 La Ligua
+            </button>
+            <button onclick="filtrarComuna('Valle Hermoso')" class="comuna-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                🧶 Valle Hermoso
+            </button>
+            <button onclick="filtrarComuna('Cabildo')" class="comuna-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                ⛰️ Cabildo
+            </button>
+        </div>
+
+        <!-- RUBRO FILTER PILLS -->
+        <div class="flex gap-1.5 overflow-x-auto hide-scroll pb-2 mb-3">
+            <button onclick="filtrarRubro('todos')" class="rubro-pill active whitespace-nowrap bg-emerald-700 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-sm">
+                Todos los Rubros
+            </button>
+            <button onclick="filtrarRubro('Gastronomía')" class="rubro-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                🍽️ Gastronomía
+            </button>
+            <button onclick="filtrarRubro('Turismo')" class="rubro-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                🏡 Cabañas
+            </button>
+            <button onclick="filtrarRubro('Textil')" class="rubro-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                🧣 Textil
+            </button>
+            <button onclick="filtrarRubro('Ferretería')" class="rubro-pill whitespace-nowrap bg-white text-slate-700 border border-slate-300 text-[11px] font-semibold px-3 py-1 rounded-full">
+                🔨 Ferretería
+            </button>
+        </div>
+
+        <!-- CARDS CONTAINER -->
+        <div id="cardsList" class="space-y-3">
+            <!-- Renderizado dinámicamente con JS -->
+        </div>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-4 py-2 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-check text-emerald-400"></i>
+        <span id="toastMsg">Mensaje copiado</span>
+    </div>
+
+    <!-- JAVASCRIPT DEL PANEL -->
+    <script>
+        const PROSPECTOS = [{"id": "p1", "nombre": "Restaurant Luilly", "rubro": "Gastronomía", "subrubro": "Comida Casera & Criolla", "comuna": "Valle Hermoso", "direccion": "Miraflores Nº 496", "telefono": "+56973149104", "telefono_formato": "+56 9 7314 9104", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Restaurante", "por_que_necesita_web": "Carta digital con código QR para los comensales, promocionar platos del día y recibir pedidos de delivery directo por WhatsApp sin pagar comisión a apps.", "enfoque": "Carta digital interactiva + pedidos de delivery directos a su WhatsApp.", "mensaje": "Hola Restaurant Luilly, buenas tardes. Les escribo porque estuve viendo su presencia local en Valle Hermoso y la buena reputación que tienen en gastronomía.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Carta digital interactiva + pedidos de delivery directos a su WhatsApp.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56973149104&text=Hola%20Restaurant%20Luilly%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Valle%20Hermoso%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20gastronom%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Carta%20digital%20interactiva%20%2B%20pedidos%20de%20delivery%20directos%20a%20su%20WhatsApp.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p2", "nombre": "Brooota Restaurante", "rubro": "Gastronomía", "subrubro": "Café & Bistró", "comuna": "La Ligua", "direccion": "Diego Portales 769", "telefono": "+56944712238", "telefono_formato": "+56 9 4471 2238", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Restaurante", "por_que_necesita_web": "Destacar la carta de cafetería y platos, horarios de atención y habilitar reservas de mesas para fines de semana.", "enfoque": "Diseño moderno con menú online y botón de reserva de mesas.", "mensaje": "Hola Brooota Restaurante, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en gastronomía.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Diseño moderno con menú online y botón de reserva de mesas.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56944712238&text=Hola%20Brooota%20Restaurante%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20gastronom%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Dise%C3%B1o%20moderno%20con%20men%C3%BA%20online%20y%20bot%C3%B3n%20de%20reserva%20de%20mesas.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p3", "nombre": "Umami Izakaya", "rubro": "Gastronomía", "subrubro": "Sushi & Cocina Fusión", "comuna": "La Ligua", "direccion": "Papudo 790", "telefono": "+56937139980", "telefono_formato": "+56 9 3713 9980", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Restaurante", "por_que_necesita_web": "Los clientes de sushi necesitan ver las fotos de las piezas y rolls antes de pedir. Un catálogo web les ahorra contestar las mismas preguntas todo el día.", "enfoque": "Catálogo visual de sushi con carrito de compras directo a WhatsApp.", "mensaje": "Hola Umami Izakaya, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en gastronomía.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Catálogo visual de sushi con carrito de compras directo a WhatsApp.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56937139980&text=Hola%20Umami%20Izakaya%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20gastronom%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Cat%C3%A1logo%20visual%20de%20sushi%20con%20carrito%20de%20compras%20directo%20a%20WhatsApp.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p4", "nombre": "Restaurante El Parrón", "rubro": "Gastronomía", "subrubro": "Parrilladas y Tradición", "comuna": "La Ligua", "direccion": "Esmeralda 501-585", "telefono": "+56332711133", "telefono_formato": "+56 33 271 1133", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Restaurante", "por_que_necesita_web": "Restaurante emblemático para almuerzos ejecutivos y turistas. Una web permite mostrar eventos especiales, menú ejecutivo y ubicación fácil desde la carretera.", "enfoque": "Web institucional con menú, reservas de eventos y fotos del local.", "mensaje": "Hola Restaurante El Parrón, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en gastronomía.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Web institucional con menú, reservas de eventos y fotos del local.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56332711133&text=Hola%20Restaurante%20El%20Parr%C3%B3n%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20gastronom%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Web%20institucional%20con%20men%C3%BA%2C%20reservas%20de%20eventos%20y%20fotos%20del%20local.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p5", "nombre": "Cabañas Cara Carü", "rubro": "Turismo", "subrubro": "Cabañas con Tinaja de Agua Caliente", "comuna": "Valle Hermoso", "direccion": "Camino a Valle Hermoso", "telefono": "+56993262121", "telefono_formato": "+56 9 9326 2121", "demo_link": "https://pagina3.github.io/muestra-cabana/", "demo_tipo": "Cabañas", "por_que_necesita_web": "Ahorrarse el 15% al 20% de comisión de Booking/Airbnb con reservas directas de turistas de Santiago o Viña del Mar.", "enfoque": "Galería de fotos de las tinajas, tarifas claras y calendario de reservas directas por WhatsApp.", "mensaje": "Hola Cabañas Cara Carü, buenas tardes. Les escribo porque estuve viendo su presencia local en Valle Hermoso y la buena reputación que tienen en turismo.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Galería de fotos de las tinajas, tarifas claras y calendario de reservas directas por WhatsApp.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56993262121&text=Hola%20Caba%C3%B1as%20Cara%20Car%C3%BC%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Valle%20Hermoso%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20turismo.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Galer%C3%ADa%20de%20fotos%20de%20las%20tinajas%2C%20tarifas%20claras%20y%20calendario%20de%20reservas%20directas%20por%20WhatsApp.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p6", "nombre": "Cabañas Huaquén", "rubro": "Turismo", "subrubro": "Cabañas cerca de la costa", "comuna": "La Ligua", "direccion": "Sector Huaquén", "telefono": "+56954143891", "telefono_formato": "+56 9 5414 3891", "demo_link": "https://pagina3.github.io/muestra-cabana/", "demo_tipo": "Cabañas", "por_que_necesita_web": "Posicionarse en Google cuando la gente busca 'cabañas cerca de La Ligua y Pichidangui' y mostrar disponibilidad sin tener que enviar fotos una por una en el chat.", "enfoque": "Web de escapadas de fin de semana con mapa interactivo y reserva directa.", "mensaje": "Hola Cabañas Huaquén, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en turismo.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Web de escapadas de fin de semana con mapa interactivo y reserva directa.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56954143891&text=Hola%20Caba%C3%B1as%20Huaqu%C3%A9n%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20turismo.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Web%20de%20escapadas%20de%20fin%20de%20semana%20con%20mapa%20interactivo%20y%20reserva%20directa.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p7", "nombre": "Cabañas Lourdes", "rubro": "Turismo", "subrubro": "Cabañas familiares", "comuna": "La Ligua", "direccion": "Sector La Ligua", "telefono": "+56985934424", "telefono_formato": "+56 9 8593 4424", "demo_link": "https://pagina3.github.io/muestra-cabana/", "demo_tipo": "Cabañas", "por_que_necesita_web": "Facilitar la llegada de visitantes durante feriados y verano con fotos reales del equipamiento, piscina o áreas verdes.", "enfoque": "Landing page de confianza con reseñas y cotizador express por WhatsApp.", "mensaje": "Hola Cabañas Lourdes, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en turismo.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Landing page de confianza con reseñas y cotizador express por WhatsApp.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56985934424&text=Hola%20Caba%C3%B1as%20Lourdes%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20turismo.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Landing%20page%20de%20confianza%20con%20rese%C3%B1as%20y%20cotizador%20express%20por%20WhatsApp.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p8", "nombre": "Fábrica de Tejidos Yamille", "rubro": "Textil", "subrubro": "Tejidos & Chalecos Artesanales", "comuna": "Valle Hermoso", "direccion": "Esmeralda Nº 260", "telefono": "+56332712815", "telefono_formato": "+56 33 271 2815", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Comercio", "por_que_necesita_web": "Valle Hermoso vende mucho a turistas en invierno, pero con un catálogo web con envíos a todo Chile (vía Starken o Correos) pueden vender durante todo el año.", "enfoque": "Catálogo digital de chalecos y prendas con opción de compras mayoristas y envíos a regiones.", "mensaje": "Hola Fábrica de Tejidos Yamille, buenas tardes. Les escribo porque estuve viendo su presencia local en Valle Hermoso y la buena reputación que tienen en textil.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Catálogo digital de chalecos y prendas con opción de compras mayoristas y envíos a regiones.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56332712815&text=Hola%20F%C3%A1brica%20de%20Tejidos%20Yamille%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Valle%20Hermoso%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20textil.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Cat%C3%A1logo%20digital%20de%20chalecos%20y%20prendas%20con%20opci%C3%B3n%20de%20compras%20mayoristas%20y%20env%C3%ADos%20a%20regiones.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p9", "nombre": "Tejidos L&M", "rubro": "Textil", "subrubro": "Confección y Lana", "comuna": "Valle Hermoso", "direccion": "Esmeralda 3575", "telefono": "+56962217557", "telefono_formato": "+56 9 6221 7557", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Comercio", "por_que_necesita_web": "Presentar novedades de temporada, catálogo para clientes mayoristas y facilitar pedidos con fotos en alta resolución.", "enfoque": "Catálogo online con botón 'Consultar disponibilidad' en cada prenda.", "mensaje": "Hola Tejidos L&M, buenas tardes. Les escribo porque estuve viendo su presencia local en Valle Hermoso y la buena reputación que tienen en textil.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Catálogo online con botón 'Consultar disponibilidad' en cada prenda.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56962217557&text=Hola%20Tejidos%20L%26M%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Valle%20Hermoso%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20textil.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Cat%C3%A1logo%20online%20con%20bot%C3%B3n%20%27Consultar%20disponibilidad%27%20en%20cada%20prenda.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p10", "nombre": "Fábrica de Dulces Elba", "rubro": "Comercio", "subrubro": "Dulces tradicionales de La Ligua", "comuna": "La Ligua", "direccion": "Ortiz de Rozas 839", "telefono": "+56332711000", "telefono_formato": "+56 33 271 1000", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Comercio", "por_que_necesita_web": "Es una marca histórica. Muchos viajeros que pasan por la 5 Norte o turistas quieren encargar cajas de dulces para regalo o para empresas en Santiago.", "enfoque": "Tienda express de dulces típicos (cajas surtidas, empolvados, chilenitos) con envío.", "mensaje": "Hola Fábrica de Dulces Elba, buenas tardes. Les escribo porque estuve viendo su presencia local en La Ligua y la buena reputación que tienen en comercio.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Tienda express de dulces típicos (cajas surtidas, empolvados, chilenitos) con envío.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56332711000&text=Hola%20F%C3%A1brica%20de%20Dulces%20Elba%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20La%20Ligua%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20comercio.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Tienda%20express%20de%20dulces%20t%C3%ADpicos%20%28cajas%20surtidas%2C%20empolvados%2C%20chilenitos%29%20con%20env%C3%ADo.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p11", "nombre": "Ferretería Socitec", "rubro": "Ferretería", "subrubro": "Construcción y Herramientas", "comuna": "Cabildo", "direccion": "Humeres 1168", "telefono": "+56954980269", "telefono_formato": "+56 9 5498 0269", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Comercio", "por_que_necesita_web": "Los maestros y contratistas locales siempre buscan cotizar materiales rápido antes de ir al local. Una web con lista de marcas, servicios y cotizador ahorra llamadas.", "enfoque": "Página web con formulario de cotización rápida de materiales para obras.", "mensaje": "Hola Ferretería Socitec, buenas tardes. Les escribo porque estuve viendo su presencia local en Cabildo y la buena reputación que tienen en ferretería.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Página web con formulario de cotización rápida de materiales para obras.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56954980269&text=Hola%20Ferreter%C3%ADa%20Socitec%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Cabildo%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20ferreter%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20P%C3%A1gina%20web%20con%20formulario%20de%20cotizaci%C3%B3n%20r%C3%A1pida%20de%20materiales%20para%20obras.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}, {"id": "p12", "nombre": "Ferretería Aliaga", "rubro": "Ferretería", "subrubro": "Materiales y Hogar", "comuna": "Cabildo", "direccion": "Av. Humeres 580", "telefono": "+56332761157", "telefono_formato": "+56 33 276 1157", "demo_link": "https://pagina3.github.io/muestra-restaurante/", "demo_tipo": "Comercio", "por_que_necesita_web": "Posicionarse como la ferretería de referencia en Cabildo en Google Maps y búsquedas móviles, con horario de atención y promociones del mes.", "enfoque": "Ficha web local optimizada para celulares y contacto inmediato.", "mensaje": "Hola Ferretería Aliaga, buenas tardes. Les escribo porque estuve viendo su presencia local en Cabildo y la buena reputación que tienen en ferretería.\n\nMe di cuenta de que actualmente no cuentan con una página web oficial para que los clientes puedan ver directamente sus servicios y novedades en el celular.\n\nSoy desarrollador web de la zona y ayudo a negocios locales a tener una página moderna enfocada en: Ficha web local optimizada para celulares y contacto inmediato.\n\n¿Tienen 2 minutitos para que les comparta una maqueta de ejemplo sin ningún compromiso de cómo se vería? ¡Saludos!", "whatsapp_url": "https://api.whatsapp.com/send?phone=56332761157&text=Hola%20Ferreter%C3%ADa%20Aliaga%2C%20buenas%20tardes.%20Les%20escribo%20porque%20estuve%20viendo%20su%20presencia%20local%20en%20Cabildo%20y%20la%20buena%20reputaci%C3%B3n%20que%20tienen%20en%20ferreter%C3%ADa.%0A%0AMe%20di%20cuenta%20de%20que%20actualmente%20no%20cuentan%20con%20una%20p%C3%A1gina%20web%20oficial%20para%20que%20los%20clientes%20puedan%20ver%20directamente%20sus%20servicios%20y%20novedades%20en%20el%20celular.%0A%0ASoy%20desarrollador%20web%20de%20la%20zona%20y%20ayudo%20a%20negocios%20locales%20a%20tener%20una%20p%C3%A1gina%20moderna%20enfocada%20en%3A%20Ficha%20web%20local%20optimizada%20para%20celulares%20y%20contacto%20inmediato.%0A%0A%C2%BFTienen%202%20minutitos%20para%20que%20les%20comparta%20una%20maqueta%20de%20ejemplo%20sin%20ning%C3%BAn%20compromiso%20de%20c%C3%B3mo%20se%20ver%C3%ADa%3F%20%C2%A1Saludos%21"}];
+        let comunaActiva = 'todas';
+        let rubroActivo = 'todos';
+
+        // Obtener estado de contactados desde localStorage del teléfono
+        function getContactados() {
+            try {
+                return JSON.parse(localStorage.getItem('contactados_la_ligua') || '{}');
+            } catch(e) {
+                return {};
+            }
+        }
+
+        function guardarContactado(id, status) {
+            const contactados = getContactados();
+            if (status) {
+                contactados[id] = true;
+            } else {
+                delete contactados[id];
+            }
+            localStorage.setItem('contactados_la_ligua', JSON.stringify(contactados));
+            actualizarContadores();
+        }
+
+        function actualizarContadores() {
+            const contactados = getContactados();
+            const total = PROSPECTOS.length;
+            const enviados = Object.keys(contactados).length;
+            const pendientes = total - enviados;
+
+            document.getElementById('counter-pending').textContent = `${pendientes} pendientes`;
+            document.getElementById('counter-done').textContent = `${enviados} contactados`;
+        }
+
+        function renderizar() {
+            const contactados = getContactados();
+            const container = document.getElementById('cardsList');
+            const search = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            const filtrados = PROSPECTOS.filter(p => {
+                const matchComuna = (comunaActiva === 'todas' || p.comuna.toLowerCase().includes(comunaActiva.toLowerCase()));
+                const matchRubro = (rubroActivo === 'todos' || p.rubro.toLowerCase() === rubroActivo.toLowerCase());
+                const matchSearch = (!search || 
+                    p.nombre.toLowerCase().includes(search) || 
+                    p.comuna.toLowerCase().includes(search) || 
+                    p.rubro.toLowerCase().includes(search) ||
+                    p.direccion.toLowerCase().includes(search)
+                );
+                return matchComuna && matchRubro && matchSearch;
+            });
+
+            if (filtrados.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 bg-white rounded-2xl border border-dashed border-slate-300 p-6">
+                        <i class="fa-solid fa-filter-circle-xmark text-slate-400 text-3xl mb-2"></i>
+                        <p class="text-xs font-bold text-slate-700">No hay negocios con este filtro</p>
+                        <p class="text-[11px] text-slate-400 mt-1">Prueba cambiando la comuna o limpiando la búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            filtrados.forEach((p, idx) => {
+                const isContacted = !!contactados[p.id];
+                const badgeColor = p.rubro === 'Gastronomía' ? 'bg-amber-100 text-amber-800' :
+                                   p.rubro === 'Turismo' ? 'bg-emerald-100 text-emerald-800' :
+                                   p.rubro === 'Textil' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800';
+
+                html += `
+                    <div id="card-${p.id}" class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-sm transition ${isContacted ? 'card-contacted' : ''}">
+                        
+                        <!-- HEADER TARJETA -->
+                        <div class="flex justify-between items-start gap-2 mb-1.5">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-tight">${p.nombre}</h3>
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeColor}">${p.rubro}</span>
+                                    <span class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot text-slate-400 text-[9px]"></i> ${p.comuna}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- CHECKBOX CONTACTADO -->
+                            <label class="flex items-center gap-1 cursor-pointer bg-slate-50 border border-slate-200 px-2 py-1 rounded-xl text-[10px] shrink-0 font-medium text-slate-600">
+                                <input type="checkbox" onchange="toggleContactado('${p.id}', this.checked)" class="rounded text-emerald-600 focus:ring-0 w-3.5 h-3.5" ${isContacted ? 'checked' : ''}>
+                                <span>${isContacted ? 'Listo' : 'Marcar'}</span>
+                            </label>
+                        </div>
+
+                        <!-- DIRECCIÓN & TELÉFONO -->
+                        <div class="text-[11px] text-slate-600 space-y-0.5 mb-2.5 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                            <div class="flex items-center justify-between">
+                                <span><i class="fa-solid fa-map-pin text-slate-400 w-3.5"></i> ${p.direccion}</span>
+                                <span class="font-bold text-slate-800"><i class="fa-solid fa-phone text-slate-400 w-3.5"></i> ${p.telefono_formato}</span>
+                            </div>
+                        </div>
+
+                        <!-- OPORTUNIDAD WEB -->
+                        <div class="text-[11px] text-slate-600 leading-relaxed mb-3">
+                            <strong class="text-slate-800 text-[10px] uppercase tracking-wider block text-emerald-800">🎯 Propuesta de Valor:</strong>
+                            <p class="text-slate-600 mt-0.5">${p.por_que_necesita_web}</p>
+                        </div>
+
+                        <!-- ACCIONES DIRECTAS WHATSAPP Y COPIAR -->
+                        <div class="grid grid-cols-5 gap-2">
+                            <a href="${p.whatsapp_url}" target="_blank" onclick="autoMarcar('${p.id}')" class="col-span-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
+                                <i class="fa-brands fa-whatsapp text-base"></i> Abrir WhatsApp Listo
+                            </a>
+                            <button onclick="copiarMensaje('${p.id}')" title="Copiar mensaje" class="col-span-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded-xl flex items-center justify-center transition border border-slate-200">
+                                <i class="fa-regular fa-copy text-sm"></i>
+                            </button>
+                        </div>
+
+                        <!-- ENLACE DE LA DEMO RECOMENDADA PARA ESTE NEGOCIO -->
+                        <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
+                            <span>Demo recomendada:</span>
+                            <a href="${p.demo_link}" target="_blank" class="font-bold text-emerald-700 hover:underline flex items-center gap-1">
+                                ${p.demo_tipo} en Vivo <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            actualizarContadores();
+        }
+
+        function toggleContactado(id, status) {
+            guardarContactado(id, status);
+            const card = document.getElementById(`card-${id}`);
+            if (card) {
+                if (status) card.classList.add('card-contacted');
+                else card.classList.remove('card-contacted');
+            }
+        }
+
+        function autoMarcar(id) {
+            guardarContactado(id, true);
+            setTimeout(renderizar, 600);
+        }
+
+        function filtrarComuna(comuna) {
+            comunaActiva = comuna;
+            document.querySelectorAll('.comuna-pill').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.target.classList.add('bg-slate-900', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
+            renderizar();
+        }
+
+        function filtrarRubro(rubro) {
+            rubroActivo = rubro;
+            document.querySelectorAll('.rubro-pill').forEach(btn => {
+                btn.classList.remove('bg-emerald-700', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.target.classList.add('bg-emerald-700', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
+            renderizar();
+        }
+
+        function filtrarProspectos() {
+            const val = document.getElementById('searchInput').value;
+            document.getElementById('clearBtn').classList.toggle('hidden', !val);
+            renderizar();
+        }
+
+        function limpiarBusqueda() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearBtn').classList.add('hidden');
+            renderizar();
+        }
+
+        function copiarMensaje(id) {
+            const item = PROSPECTOS.find(p => p.id === id);
+            if (item) {
+                navigator.clipboard.writeText(item.mensaje).then(() => {
+                    mostrarToast("Mensaje de WhatsApp copiado al portapapeles");
+                }).catch(() => {
+                    const input = document.createElement('textarea');
+                    input.value = item.mensaje;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                    mostrarToast("Mensaje de WhatsApp copiado al portapapeles");
+                });
+            }
+        }
+
+        function mostrarToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        // Inicializar al cargar
+        renderizar();
+    </script>
+</body>
+</html>
