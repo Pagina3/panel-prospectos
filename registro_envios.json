@@ -43,5 +43,14 @@
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
         "fecha": "2026-11-03 14:05:29",
         "estado": "enviado"
+    },
+    "tel_56994415870": {
+        "nombre": "Farmacia Veterinaria Paulinavet",
+        "telefono": "+56 9 9441 5870",
+        "comuna": "La Ligua",
+        "rubro": "Veterinaria",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 14:59:37",
+        "estado": "enviado"
     }
 }
