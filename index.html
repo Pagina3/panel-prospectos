@@ -22,6 +22,16 @@
             color: #ffffff !important;
             box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
         }
+        .subtab-bot-btn.active {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.35);
+        }
+        .cant-btn.active-cant {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            border-color: #059669 !important;
+        }
         .card-anim {
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -45,10 +55,17 @@
                 </div>
             </div>
 
-            <!-- SETTINGS & OPTIONS BUTTON -->
-            <button onclick="abrirModalOpciones()" title="Configuración" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700/80 transition active:scale-95">
-                <i class="fa-solid fa-gear text-xs"></i>
-            </button>
+            <!-- BOT WHATSAPP & SETTINGS BUTTONS -->
+            <div class="flex items-center gap-1.5">
+                <button onclick="abrirModalBot()" class="bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-black text-[11px] px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md shadow-emerald-500/25 active:scale-95 transition">
+                    <i class="fa-brands fa-whatsapp text-sm text-emerald-100"></i>
+                    <span>Bot WhatsApp</span>
+                    <span class="bg-emerald-950/40 text-[8px] font-mono px-1 py-0.2 rounded text-emerald-200">1-50</span>
+                </button>
+                <button onclick="abrirModalOpciones()" title="Configuración" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700/80 transition active:scale-95">
+                    <i class="fa-solid fa-gear text-xs"></i>
+                </button>
+            </div>
         </div>
 
         <!-- QUICK DEMOS ACCORDION / PILLS -->
@@ -70,6 +87,26 @@
 
     <!-- MAIN CONTAINER -->
     <main class="max-w-md mx-auto px-3.5 pt-3">
+
+        <!-- BANNER DISPARADOR BOT WHATSAPP -->
+        <div class="bg-gradient-to-r from-slate-900 via-emerald-950/90 to-slate-900 border border-emerald-500/30 rounded-2xl p-3 mb-3 text-white flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base border border-emerald-500/30 shrink-0">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-xs font-black text-white">Menú Bot & Envíos WhatsApp</span>
+                        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-1.5 rounded font-bold">1 a 50</span>
+                    </div>
+                    <p class="text-[10px] text-slate-300 leading-tight">Envío masivo en tu móvil o control del bot en PC</p>
+                </div>
+            </div>
+            <button onclick="abrirModalBot()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black px-2.5 py-1.5 rounded-xl flex items-center gap-1 shadow-sm active:scale-95 transition shrink-0">
+                <span>Abrir</span>
+                <i class="fa-solid fa-chevron-right text-[8px]"></i>
+            </button>
+        </div>
 
         <!-- 5 PESTAÑAS PRINCIPALES (STICKY CONTROL) -->
         <div class="p-1 bg-slate-900/95 backdrop-blur-md rounded-2xl border border-slate-800 mb-3 shadow-md grid grid-cols-5 gap-1">
@@ -246,6 +283,278 @@
             <button onclick="cerrarModalOpciones()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
                 Listo
             </button>
+        </div>
+    </div>
+
+    <!-- MODAL COMPLETO DEL BOT & AUTOMATIZACIÓN WHATSAPP -->
+    <div id="modalBot" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-md w-full p-4 sm:p-5 shadow-2xl border border-slate-200 my-auto max-h-[92vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-lg shadow-sm">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-slate-900 text-sm leading-tight">Centro de Envíos & Bot WhatsApp</h3>
+                        <p class="text-[10px] text-slate-500">Automatización, tandas de 1 a 50 y respuestas IA</p>
+                    </div>
+                </div>
+                <button onclick="cerrarModalBot()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Subtabs Navigation -->
+            <div class="grid grid-cols-4 gap-1 p-1 bg-slate-100 rounded-2xl my-3 text-[10px] font-bold text-slate-600 shrink-0">
+                <button onclick="cambiarSubtabBot('movil')" id="subtab-btn-movil" class="subtab-bot-btn active py-1.5 rounded-xl text-center transition flex flex-col items-center gap-0.5">
+                    <i class="fa-solid fa-mobile-screen text-xs"></i>
+                    <span>Móvil</span>
+                </button>
+                <button onclick="cambiarSubtabBot('pc')" id="subtab-btn-pc" class="subtab-bot-btn py-1.5 rounded-xl text-center transition flex flex-col items-center gap-0.5">
+                    <i class="fa-solid fa-laptop-code text-xs"></i>
+                    <span>Bot PC</span>
+                </button>
+                <button onclick="cambiarSubtabBot('test')" id="subtab-btn-test" class="subtab-bot-btn py-1.5 rounded-xl text-center transition flex flex-col items-center gap-0.5">
+                    <i class="fa-solid fa-vial text-xs"></i>
+                    <span>Probar</span>
+                </button>
+                <button onclick="cambiarSubtabBot('pedidos')" id="subtab-btn-pedidos" class="subtab-bot-btn py-1.5 rounded-xl text-center transition flex flex-col items-center gap-0.5">
+                    <i class="fa-solid fa-bell text-xs text-amber-500"></i>
+                    <span>Pedidos</span>
+                </button>
+            </div>
+
+            <!-- Subtab Content (Scrollable) -->
+            <div class="overflow-y-auto flex-1 pr-0.5 space-y-3.5 text-xs text-slate-700">
+
+                <!-- 1. SUBTAB: MÓVIL (LANZADOR GUIADO SIN PC) -->
+                <div id="subtab-content-movil" class="space-y-3">
+                    <div class="bg-emerald-50/70 border border-emerald-200 p-3 rounded-2xl">
+                        <span class="font-bold text-emerald-900 block flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-bolt text-emerald-600"></i> Lanzador de Envíos en tu Celular
+                        </span>
+                        <p class="text-[11px] text-emerald-800 leading-relaxed">
+                            Envía mensajes en tanda directamente desde tu WhatsApp móvil sin depender de tener la computadora prendida.
+                        </p>
+                    </div>
+
+                    <!-- Configuración de Tanda Móvil -->
+                    <div id="colaConfigView" class="space-y-3">
+                        <div>
+                            <label class="font-bold text-slate-800 block mb-1 text-[11px]">¿Cuántos prospectos contactar? (1 a 50)</label>
+                            <div class="grid grid-cols-4 gap-1.5 mb-2">
+                                <button type="button" onclick="setCantidadMovil(5)" class="cant-btn py-1.5 rounded-xl border border-slate-300 font-bold text-xs hover:border-emerald-500">5</button>
+                                <button type="button" onclick="setCantidadMovil(10)" class="cant-btn py-1.5 rounded-xl border border-slate-300 font-bold text-xs active-cant hover:border-emerald-500">10</button>
+                                <button type="button" onclick="setCantidadMovil(25)" class="cant-btn py-1.5 rounded-xl border border-slate-300 font-bold text-xs hover:border-emerald-500">25</button>
+                                <button type="button" onclick="setCantidadMovil(50)" class="cant-btn py-1.5 rounded-xl border border-slate-300 font-bold text-xs hover:border-emerald-500">50</button>
+                            </div>
+                            <input type="number" id="inputCantidadMovil" min="1" max="50" value="10" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-emerald-600">
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-800 block mb-1 text-[11px]">Filtrar por Comuna:</label>
+                            <select id="selectComunaMovil" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                                <option value="todas">Todas las Comunas</option>
+                                <option value="La Ligua">La Ligua / Valle Hermoso</option>
+                                <option value="Cabildo">Cabildo</option>
+                                <option value="Papudo">Papudo</option>
+                                <option value="Zapallar">Zapallar / Catapilco</option>
+                                <option value="Quillota">Quillota</option>
+                                <option value="Quilpué">Quilpué</option>
+                                <option value="Viña del Mar">Viña del Mar</option>
+                                <option value="Valparaíso">Valparaíso</option>
+                            </select>
+                        </div>
+
+                        <button onclick="iniciarColaMovil()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black py-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition">
+                            <i class="fa-solid fa-play"></i> Iniciar Cola de Envíos en Móvil
+                        </button>
+                    </div>
+
+                    <!-- Vista de Ejecución de Cola Móvil -->
+                    <div id="colaEjecucionView" class="hidden space-y-3">
+                        <div class="flex items-center justify-between bg-slate-100 p-2.5 rounded-2xl">
+                            <div>
+                                <span class="font-bold text-slate-900 block" id="colaProgresoTexto">Prospecto 1 de 10</span>
+                                <span class="text-[10px] text-slate-500" id="colaStatusDetalle">Listo para abrir en WhatsApp</span>
+                            </div>
+                            <button onclick="detenerColaMovil()" class="text-xs text-red-600 hover:text-red-800 font-bold px-2 py-1 bg-red-50 rounded-xl border border-red-200">
+                                Cancelar
+                            </button>
+                        </div>
+
+                        <!-- Barra de Progreso -->
+                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div id="colaProgressBar" class="bg-emerald-600 h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+                        </div>
+
+                        <!-- Card del Prospecto Actual -->
+                        <div id="colaCardActual" class="border-2 border-emerald-500 bg-white p-3.5 rounded-2xl shadow-sm space-y-2">
+                            <!-- Inyectado dinámicamente -->
+                        </div>
+
+                        <!-- Botones de Acción de Cola -->
+                        <div class="space-y-2">
+                            <a id="colaBtnAbrirWsp" href="#" target="_blank" onclick="registrarEnvioColaActual()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black py-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md transition">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Abrir WhatsApp y Enviar
+                            </a>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="siguienteProspectoCola()" id="colaBtnSiguiente" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                                    <span>Siguiente</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                                <button onclick="saltarProspectoCola()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">
+                                    Saltar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. SUBTAB: BOT PC (CONTROL DE SCRIPT PLAYWRIGHT / EDGE) -->
+                <div id="subtab-content-pc" class="hidden space-y-3">
+                    <!-- Estado de Conexión Local -->
+                    <div id="bridgeStatusBanner" class="p-3 rounded-2xl border flex items-center justify-between text-xs bg-slate-50 border-slate-200">
+                        <div class="flex items-center gap-2">
+                            <div id="bridgeStatusDot" class="w-2.5 h-2.5 rounded-full bg-slate-400"></div>
+                            <div>
+                                <span class="font-bold text-slate-800 block" id="bridgeStatusText">Detectando Puente PC...</span>
+                                <span class="text-[10px] text-slate-500" id="bridgeStatusSub">http://127.0.0.1:5050</span>
+                            </div>
+                        </div>
+                        <button onclick="verificarPuenteLocal()" class="text-[10px] bg-white border border-slate-200 font-bold px-2 py-1 rounded-lg text-slate-600 hover:bg-slate-100">
+                            Revisar
+                        </button>
+                    </div>
+
+                    <!-- Configuración de Opciones del Script -->
+                    <div class="space-y-2.5">
+                        <div>
+                            <label class="font-bold text-slate-800 block mb-1 text-[11px]">Modo de Ejecución:</label>
+                            <select id="pcModoSelect" onchange="actualizarComandoPC()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                                <option value="auto">🚀 Envío Automático (1 a 50 con pausas humanas)</option>
+                                <option value="manual">✋ Envío Manual (Confirmación 1 a 1)</option>
+                                <option value="responder">👂 Asistente Comercial IA (Escuchar y atender pedidos)</option>
+                                <option value="full">⚡ Combo Full (Enviar lote + Asistente en escucha)</option>
+                                <option value="login">🔐 Vincular Sesión de WhatsApp Web (Código QR)</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="font-bold text-slate-800 block mb-1 text-[11px]">Límite de Envíos:</label>
+                                <select id="pcLimiteSelect" onchange="actualizarComandoPC()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-medium text-slate-800">
+                                    <option value="5">5 mensajes</option>
+                                    <option value="10" selected>10 mensajes</option>
+                                    <option value="25">25 mensajes</option>
+                                    <option value="50">50 mensajes (Máx)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="font-bold text-slate-800 block mb-1 text-[11px]">Comuna Filtro:</label>
+                                <select id="pcComunaSelect" onchange="actualizarComandoPC()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-medium text-slate-800">
+                                    <option value="todas">Todas</option>
+                                    <option value="La Ligua">La Ligua</option>
+                                    <option value="Cabildo">Cabildo</option>
+                                    <option value="Papudo">Papudo</option>
+                                    <option value="Zapallar">Zapallar</option>
+                                    <option value="Quillota">Quillota</option>
+                                    <option value="Viña del Mar">Viña del Mar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción con Puente PC -->
+                        <div id="bridgeActionContainer" class="pt-1">
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="ejecutarBotPC()" id="btnEjecutarBotPC" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+                                    <i class="fa-solid fa-play"></i> Iniciar en mi PC
+                                </button>
+                                <button onclick="detenerBotPC()" id="btnDetenerBotPC" class="bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+                                    <i class="fa-solid fa-stop"></i> Detener Bot
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Consola de Logs en Vivo -->
+                        <div class="bg-slate-950 text-emerald-400 p-3 rounded-2xl font-mono text-[10px] space-y-1 max-h-32 overflow-y-auto" id="pcLogsBox">
+                            <div>> Sistema de Control de Bot listo.</div>
+                        </div>
+
+                        <!-- Comando Copiable para Terminal -->
+                        <div class="p-3 bg-slate-100 rounded-2xl border border-slate-200">
+                            <span class="font-bold text-slate-800 block mb-1 text-[10px]">O ejecutar manualmente en tu terminal de Windows:</span>
+                            <div class="flex items-center gap-1.5">
+                                <input type="text" id="inputComandoPC" readonly value="python enviar_whatsapp_auto.py --modo auto --limite 10" class="flex-1 bg-white border border-slate-300 rounded-lg px-2 py-1.5 text-[10px] font-mono text-slate-700">
+                                <button onclick="copiarComandoPC()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold shrink-0">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. SUBTAB: PROBAR MENSAJE DIRECTO -->
+                <div id="subtab-content-test" class="hidden space-y-3">
+                    <div class="bg-blue-50 border border-blue-200 p-3 rounded-2xl">
+                        <span class="font-bold text-blue-900 block mb-1">🧪 Mensaje de Prueba Directo</span>
+                        <p class="text-[11px] text-blue-800 leading-relaxed">
+                            Envía un mensaje de muestra con la maqueta a tu propio número para revisar cómo se ve antes de contactar a clientes reales.
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-800 block mb-1 text-[11px]">Número de WhatsApp de Prueba:</label>
+                        <input type="tel" id="inputTestPhone" placeholder="+56912345678" value="+569" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-800 block mb-1 text-[11px]">Selecciona la Maqueta para probar:</label>
+                        <select id="selectTestMaqueta" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-800">
+                            <option value="estetica">💇‍♀️ Peluquería & Estética (Aura Studio)</option>
+                            <option value="restaurante">🍽️ Restaurante QR (Bistró Criollo)</option>
+                            <option value="cabana">🏡 Cabañas & Tinajas (Bosque Nativo)</option>
+                            <option value="rancho">🏊‍♂️ Resort & Hotel Club (Rancho Los Olivos)</option>
+                        </select>
+                    </div>
+
+                    <button onclick="enviarMensajePruebaDirecto()" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-black py-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Prueba a mi Celular
+                    </button>
+                </div>
+
+                <!-- 4. SUBTAB: PEDIDOS Y REGISTRO IA -->
+                <div id="subtab-content-pedidos" class="hidden space-y-3">
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-2xl">
+                        <span class="font-bold text-amber-900 block mb-1">📋 Pedidos Tomados por el Asistente IA</span>
+                        <p class="text-[11px] text-amber-800 leading-relaxed">
+                            Cuando dejas el bot en modo escucha, atiende a los clientes por WhatsApp y registra sus pedidos automáticamente aquí.
+                        </p>
+                    </div>
+
+                    <div id="pedidosModalLista" class="space-y-2 max-h-48 overflow-y-auto">
+                        <!-- Inyectado dinámicamente -->
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <button onclick="descargarCSVProspectos()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-solid fa-download"></i> Descargar CSV
+                        </button>
+                        <button onclick="cerrarModalBot(); cambiarTab('pedidos');" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-solid fa-eye"></i> Ver en CRM
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between shrink-0">
+                <span class="text-[10px] text-slate-400 font-medium">Prospector Regional v6.0</span>
+                <button onclick="cerrarModalBot()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-xl text-xs">
+                    Cerrar
+                </button>
+            </div>
         </div>
     </div>
 
@@ -846,6 +1155,307 @@
                     }
                 })
                 .catch(() => {});
+        }
+
+        // ==========================================
+        // FUNCIONALIDADES DEL MENÚ BOT Y AUTOMATIZACIÓN
+        // ==========================================
+        let bridgeInterval = null;
+        let bridgeConnected = false;
+        let colaProspectos = [];
+        let colaIndex = 0;
+
+        function abrirModalBot() {
+            document.getElementById('modalBot').classList.remove('hidden');
+            verificarPuenteLocal();
+            actualizarComandoPC();
+            renderPedidosEnModal();
+            if (bridgeInterval) clearInterval(bridgeInterval);
+            bridgeInterval = setInterval(verificarPuenteLocal, 3000);
+        }
+
+        function cerrarModalBot() {
+            document.getElementById('modalBot').classList.add('hidden');
+            if (bridgeInterval) {
+                clearInterval(bridgeInterval);
+                bridgeInterval = null;
+            }
+        }
+
+        function cambiarSubtabBot(subtab) {
+            ['movil', 'pc', 'test', 'pedidos'].forEach(s => {
+                const btn = document.getElementById('subtab-btn-' + s);
+                const content = document.getElementById('subtab-content-' + s);
+                if (btn && content) {
+                    if (s === subtab) {
+                        btn.classList.add('active');
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.classList.remove('active');
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function setCantidadMovil(cant) {
+            document.getElementById('inputCantidadMovil').value = cant;
+            document.querySelectorAll('.cant-btn').forEach(btn => {
+                if (btn.textContent.trim() == cant) btn.classList.add('active-cant');
+                else btn.classList.remove('active-cant');
+            });
+        }
+
+        function iniciarColaMovil() {
+            const cant = parseInt(document.getElementById('inputCantidadMovil').value) || 10;
+            const comuna = document.getElementById('selectComunaMovil').value;
+            const contactados = getContactados();
+
+            colaProspectos = PROSPECTOS.filter(p => {
+                if (contactados[p.id]) return false;
+                if (comuna !== 'todas' && !p.comuna.toLowerCase().includes(comuna.toLowerCase())) return false;
+                return true;
+            }).slice(0, Math.min(cant, 50));
+
+            if (colaProspectos.length === 0) {
+                alert('No hay prospectos pendientes con ese filtro o ya fueron todos contactados.');
+                return;
+            }
+
+            colaIndex = 0;
+            document.getElementById('colaConfigView').classList.add('hidden');
+            document.getElementById('colaEjecucionView').classList.remove('hidden');
+            renderColaPaso();
+        }
+
+        function renderColaPaso() {
+            if (colaIndex >= colaProspectos.length) {
+                alert('¡Tanda completada exitosamente! Se han enviado todos los prospectos seleccionados.');
+                detenerColaMovil();
+                renderizar();
+                return;
+            }
+
+            const p = colaProspectos[colaIndex];
+            const pct = Math.round(((colaIndex + 1) / colaProspectos.length) * 100);
+
+            document.getElementById('colaProgresoTexto').textContent = `Prospecto ${colaIndex + 1} de ${colaProspectos.length}`;
+            document.getElementById('colaStatusDetalle').textContent = `${p.nombre} · ${p.comuna}`;
+            document.getElementById('colaProgressBar').style.width = pct + '%';
+
+            const cardHtml = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">${p.rubro} · ${p.comuna}</span>
+                        <h4 class="font-black text-slate-900 text-sm mt-1">${p.nombre}</h4>
+                        <p class="text-[11px] text-slate-500 font-mono">${p.telefono_formato}</p>
+                    </div>
+                    <span class="text-[10px] bg-slate-100 font-bold px-2 py-0.5 rounded text-slate-600">ID #${p.id}</span>
+                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[10px] text-slate-600 leading-relaxed font-sans max-h-24 overflow-y-auto">
+                    ${p.mensaje.replace(/
+/g, '<br>')}
+                </div>
+            `;
+            document.getElementById('colaCardActual').innerHTML = cardHtml;
+            document.getElementById('colaBtnAbrirWsp').href = p.whatsapp_url;
+        }
+
+        function registrarEnvioColaActual() {
+            if (colaIndex < colaProspectos.length) {
+                const p = colaProspectos[colaIndex];
+                guardarContactado(p.id, true);
+                mostrarToast(`Prospecto #${p.id} marcado como enviado`);
+            }
+        }
+
+        function siguienteProspectoCola() {
+            colaIndex++;
+            renderColaPaso();
+        }
+
+        function saltarProspectoCola() {
+            colaIndex++;
+            renderColaPaso();
+        }
+
+        function detenerColaMovil() {
+            colaProspectos = [];
+            colaIndex = 0;
+            document.getElementById('colaEjecucionView').classList.add('hidden');
+            document.getElementById('colaConfigView').classList.remove('hidden');
+        }
+
+        // Control de Bot PC
+        function actualizarComandoPC() {
+            const modo = document.getElementById('pcModoSelect').value;
+            const limite = document.getElementById('pcLimiteSelect').value;
+            const comuna = document.getElementById('pcComunaSelect').value;
+
+            let cmd = `python enviar_whatsapp_auto.py --modo ${modo} --limite ${limite}`;
+            if (comuna !== 'todas') {
+                cmd += ` --comuna "${comuna}"`;
+            }
+            document.getElementById('inputComandoPC').value = cmd;
+        }
+
+        function copiarComandoPC() {
+            const cmd = document.getElementById('inputComandoPC').value;
+            copiarAlPortapapeles(cmd, "Comando copiado al portapapeles");
+        }
+
+        async function verificarPuenteLocal() {
+            const dot = document.getElementById('bridgeStatusDot');
+            const txt = document.getElementById('bridgeStatusText');
+            const sub = document.getElementById('bridgeStatusSub');
+            const logsBox = document.getElementById('pcLogsBox');
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1200);
+                const res = await fetch('http://127.0.0.1:5050/api/status', { signal: controller.signal });
+                clearTimeout(timeoutId);
+
+                if (res.ok) {
+                    const data = await res.json();
+                    bridgeConnected = true;
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+                    if (data.running) {
+                        txt.textContent = `🟢 Bot Corriendo en PC (PID: ${data.pid})`;
+                        sub.textContent = `Modo: ${data.modo} · Límite: ${data.limite}`;
+                    } else {
+                        txt.textContent = "🟢 Puente PC Conectado (127.0.0.1:5050)";
+                        sub.textContent = "Listo para ejecutar órdenes desde la web";
+                    }
+
+                    if (data.logs && data.logs.length > 0) {
+                        logsBox.innerHTML = data.logs.map(l => `<div>${l}</div>`).join('');
+                        logsBox.scrollTop = logsBox.scrollHeight;
+                    }
+                    return;
+                }
+            } catch(e) {
+                // Servidor apagado
+            }
+
+            bridgeConnected = false;
+            dot.className = "w-2.5 h-2.5 rounded-full bg-slate-400";
+            txt.textContent = "⚪ Servidor PC en Reposo";
+            sub.textContent = "Ejecuta iniciar_bot.bat en tu PC o copia el comando";
+        }
+
+        async function ejecutarBotPC() {
+            const modo = document.getElementById('pcModoSelect').value;
+            const limite = parseInt(document.getElementById('pcLimiteSelect').value) || 10;
+            const comuna = document.getElementById('pcComunaSelect').value;
+
+            try {
+                const res = await fetch('http://127.0.0.1:5050/api/ejecutar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ modo, limite, comuna })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    mostrarToast("Bot iniciado en tu PC!");
+                    verificarPuenteLocal();
+                } else {
+                    alert("Aviso: " + (data.error || "No se pudo iniciar"));
+                }
+            } catch(e) {
+                alert("Para iniciar el bot con 1 clic desde esta página, primero abre el archivo 'iniciar_bot.bat' y selecciona la opción 1 (Puente Web). O copia el comando para tu terminal.");
+            }
+        }
+
+        async function detenerBotPC() {
+            try {
+                const res = await fetch('http://127.0.0.1:5050/api/detener', { method: 'POST' });
+                const data = await res.json();
+                mostrarToast(data.mensaje || "Bot detenido");
+                verificarPuenteLocal();
+            } catch(e) {
+                alert("El servidor del bot no está respondiendo.");
+            }
+        }
+
+        function enviarMensajePruebaDirecto() {
+            const tel = (document.getElementById('inputTestPhone').value || '').trim();
+            const maq = document.getElementById('selectTestMaqueta').value;
+
+            if (!tel || tel.length < 8) {
+                alert("Por favor ingresa un número de teléfono válido con código de país (ej. +56912345678)");
+                return;
+            }
+
+            let urlMaqueta = "https://pagina3.github.io/muestra-estetica/";
+            let rubroNombre = "Salón de Belleza y Peluquería";
+            if (maq === 'restaurante') {
+                urlMaqueta = "https://pagina3.github.io/muestra-restaurante/";
+                rubroNombre = "Restaurante";
+            } else if (maq === 'cabana') {
+                urlMaqueta = "https://pagina3.github.io/muestra-cabana/";
+                rubroNombre = "Cabañas y Alojamiento";
+            } else if (maq === 'rancho') {
+                urlMaqueta = "https://pagina3.github.io/muestra-rancho/";
+                rubroNombre = "Centro Turístico y Resort";
+            }
+
+            const textoPrueba = `Hola! Soy Luis, desarrollador web de la V Región.
+
+Te preparé una maqueta de muestra interactiva especialmente adaptada para ${rubroNombre}:
+${urlMaqueta}
+
+Incluye catálogo, reservas online y botón directo a tu WhatsApp. ¿Qué te parece?`;
+            const cleanTel = tel.replace(/\+/g, '').replace(/\s/g, '').replace(/-/g, '');
+            const finalUrl = `https://api.whatsapp.com/send?phone=${cleanTel}&text=${encodeURIComponent(textoPrueba)}`;
+            window.open(finalUrl, '_blank');
+        }
+
+        function renderPedidosEnModal() {
+            const container = document.getElementById('pedidosModalLista');
+            const lista = Object.entries(PEDIDOS_DATA);
+
+            if (lista.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                        <i class="fa-solid fa-clock-rotate-left text-slate-400 text-lg mb-1"></i>
+                        <p class="text-[11px] text-slate-500 font-medium">Aún no hay pedidos registrados</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            lista.forEach(([id, p]) => {
+                html += `
+                    <div class="p-2.5 bg-white border border-amber-200 rounded-xl shadow-xs">
+                        <div class="flex justify-between items-start">
+                            <span class="font-bold text-slate-900">${p.cliente || 'Cliente'}</span>
+                            <span class="text-[9px] bg-amber-100 text-amber-800 px-1.5 py-0.2 rounded font-bold">${p.fecha || 'Reciente'}</span>
+                        </div>
+                        <p class="text-[10px] text-slate-600 mt-0.5">${p.detalle || p.mensaje || 'Interesado en propuesta'}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function descargarCSVProspectos() {
+            let csv = "ID,Negocio,Rubro,Comuna,Dirección,Teléfono,WhatsApp Link
+";
+            PROSPECTOS.forEach(p => {
+                csv += `"${p.id}","${(p.nombre||'').replace(/"/g, '""')}","${p.rubro}","${p.comuna}","${(p.direccion||'').replace(/"/g, '""')}","${p.telefono_formato}","${p.whatsapp_url}"
+`;
+            });
+            const blob = new Blob(["﻿" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "prospectos_la_ligua_v_region.csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            mostrarToast("CSV descargado exitosamente");
         }
 
         // Inicializar al cargar
