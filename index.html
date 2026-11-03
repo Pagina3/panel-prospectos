@@ -550,9 +550,34 @@
             }
         }
 
+        // Auto-sincronizar con envíos del Bot si existe registro_envios.json
+        function sincronizarConBot() {
+            fetch('registro_envios.json?t=' + Date.now())
+                .then(r => r.ok ? r.json() : null)
+                .then(data => {
+                    if (data && typeof data === 'object') {
+                        const contactados = getContactados();
+                        let changed = false;
+                        for (const [id, info] of Object.entries(data)) {
+                            if (info && info.estado === 'enviado' && !contactados[id]) {
+                                contactados[id] = { fecha: info.fecha || new Date().toLocaleDateString('es-CL'), bot: true };
+                                changed = true;
+                            }
+                        }
+                        if (changed) {
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(contactados));
+                            actualizarContadores();
+                            renderizar();
+                        }
+                    }
+                })
+                .catch(() => {});
+        }
+
         // Inicializar al cargar
         actualizarContadores();
         renderizar();
+        sincronizarConBot();
     </script>
 </body>
 </html>
