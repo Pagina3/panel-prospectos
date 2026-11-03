@@ -1,1 +1,47 @@
-{}
+{
+    "tel_56973149104": {
+        "nombre": "Restaurant Luilly",
+        "telefono": "+56 9 7314 9104",
+        "comuna": "Valle Hermoso",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 14:00:03",
+        "estado": "enviado"
+    },
+    "tel_56944712238": {
+        "nombre": "Brooota Restaurante",
+        "telefono": "+56 9 4471 2238",
+        "comuna": "La Ligua",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 14:01:05",
+        "estado": "enviado"
+    },
+    "tel_56979305815": {
+        "nombre": "Pastelería Recetas de Mi Nana",
+        "telefono": "+56 9 7930 5815",
+        "comuna": "La Ligua",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 14:02:29",
+        "estado": "enviado"
+    },
+    "tel_56993262121": {
+        "nombre": "Cabañas Cara Carü",
+        "telefono": "+56 9 9326 2121",
+        "comuna": "Valle Hermoso",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-03 14:03:48",
+        "estado": "enviado"
+    },
+    "tel_56981386533": {
+        "nombre": "Clínica Veterinaria Pet Medical",
+        "telefono": "+56 9 8138 6533",
+        "comuna": "La Ligua",
+        "rubro": "Veterinaria",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 14:05:29",
+        "estado": "enviado"
+    }
+}
