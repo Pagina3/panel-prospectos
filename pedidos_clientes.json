@@ -1,1 +1,18 @@
-{}
+{
+    "tel_56988099237": {
+        "negocio": "+56 9 8809 9237",
+        "telefono": "+56 9 8809 9237",
+        "comuna": "V Región",
+        "rubro": "Comercio / Servicios",
+        "ultimo_mensaje_cliente": "Y cuanto seria el precio?",
+        "intenciones": [
+            "PRECIO"
+        ],
+        "detalles_solicitados": [
+            "Adaptación personalizada para rubro Comercio / Servicios"
+        ],
+        "fecha_solicitud": "2026-11-03 15:32:46",
+        "estado": "esperando_material",
+        "demo_asignada": "https://pagina3.github.io/muestra-restaurante/"
+    }
+}
