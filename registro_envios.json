@@ -52,5 +52,59 @@
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
         "fecha": "2026-11-03 14:59:37",
         "estado": "enviado"
+    },
+    "tel_56989024658": {
+        "nombre": "Vulcanización El Quero",
+        "telefono": "+56 9 8902 4658",
+        "comuna": "La Ligua",
+        "rubro": "Servicios",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:35:09",
+        "estado": "enviado"
+    },
+    "tel_56993296906": {
+        "nombre": "Cerrajería José Valenzuela",
+        "telefono": "+56 9 9329 6906",
+        "comuna": "La Ligua",
+        "rubro": "Servicios",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:36:15",
+        "estado": "enviado"
+    },
+    "tel_56985516641": {
+        "nombre": "Grúas & Fletes MAXFRA",
+        "telefono": "+56 9 8551 6641",
+        "comuna": "La Ligua",
+        "rubro": "Servicios",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:37:22",
+        "estado": "enviado"
+    },
+    "tel_56956269253": {
+        "nombre": "Taca Hair & Beauty",
+        "telefono": "+56 9 5626 9253",
+        "comuna": "La Ligua",
+        "rubro": "Estética",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:38:24",
+        "estado": "enviado"
+    },
+    "tel_56962906422": {
+        "nombre": "Barbería L'GANTE",
+        "telefono": "+56 9 6290 6422",
+        "comuna": "La Ligua",
+        "rubro": "Estética",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:40:04",
+        "estado": "enviado"
+    },
+    "tel_56959161821": {
+        "nombre": "Navaja Maestra",
+        "telefono": "+56 9 5916 1821",
+        "comuna": "La Ligua",
+        "rubro": "Estética",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:41:26",
+        "estado": "enviado"
     }
 }
