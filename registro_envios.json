@@ -106,5 +106,95 @@
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
         "fecha": "2026-11-03 15:41:26",
         "estado": "enviado"
+    },
+    "tel_56937343614": {
+        "nombre": "WAPA Nails & Studio Beauty",
+        "telefono": "+56 9 3734 3614",
+        "comuna": "La Ligua",
+        "rubro": "Estética",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:45:28",
+        "estado": "enviado"
+    },
+    "tel_56954980269": {
+        "nombre": "Ferretería Socitec",
+        "telefono": "+56 9 5498 0269",
+        "comuna": "Cabildo",
+        "rubro": "Ferretería",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:46:45",
+        "estado": "sin_whatsapp"
+    },
+    "tel_56981251504": {
+        "nombre": "Sushi Kim Cabildo",
+        "telefono": "+56 9 8125 1504",
+        "comuna": "Cabildo",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:47:36",
+        "estado": "sin_whatsapp"
+    },
+    "tel_56979507817": {
+        "nombre": "Cabañas Pichicuy RG",
+        "telefono": "+56 9 7950 7817",
+        "comuna": "Pichicuy",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-03 15:49:00",
+        "estado": "enviado"
+    },
+    "tel_56949492676": {
+        "nombre": "Cocinería & Marisquería Pichicuy",
+        "telefono": "+56 9 4949 2676",
+        "comuna": "Pichicuy",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:50:35",
+        "estado": "sin_whatsapp"
+    },
+    "tel_56979330409": {
+        "nombre": "Restaurante El Pirata Suizo",
+        "telefono": "+56 9 7933 0409",
+        "comuna": "Los Molles",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-03 15:51:42",
+        "estado": "sin_whatsapp"
+    },
+    "tel_56966008282": {
+        "nombre": "Camping & Cabañas Huaquén",
+        "telefono": "+56 9 6600 8282",
+        "comuna": "Huaquén",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-03 15:53:01",
+        "estado": "enviado"
+    },
+    "tel_56985934424": {
+        "nombre": "Cabañas Los Hornos de Huaquén",
+        "telefono": "+56 9 8593 4424",
+        "comuna": "Los Hornos",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-03 15:54:18",
+        "estado": "sin_whatsapp"
+    },
+    "tel_56937024764": {
+        "nombre": "Hotel Club Rancho Los Olivos",
+        "telefono": "+56 9 3702 4764",
+        "comuna": "Los Hornos",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-rancho/",
+        "fecha": "2026-11-03 15:55:59",
+        "estado": "enviado"
+    },
+    "tel_56995455963": {
+        "nombre": "Cabañas Figueroa Ibarra",
+        "telefono": "+56 9 9545 5963",
+        "comuna": "Catapilco",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-03 15:57:14",
+        "estado": "enviado"
     }
 }
