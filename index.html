@@ -660,7 +660,7 @@
 
                 let htmlPedidos = '';
                 pedidosLista.forEach(([id, p]) => {
-                    const telClean = (p.telefono || '').replace(/\+/g, '').replace(/\s/g, '').replace(/-/g, '');
+                    const telClean = (p.telefono || "").split("+").join("").split(" ").join("").split("-").join("");
                     htmlPedidos += `
                         <div class="card-anim bg-gradient-to-br from-white to-amber-50/40 rounded-3xl p-4 border-2 border-amber-300/80 shadow-md">
                             <div class="flex justify-between items-start gap-2 mb-2">
@@ -1252,10 +1252,7 @@
                     </div>
                     <span class="text-[10px] bg-slate-100 font-bold px-2 py-0.5 rounded text-slate-600">ID #${p.id}</span>
                 </div>
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[10px] text-slate-600 leading-relaxed font-sans max-h-24 overflow-y-auto">
-                    ${p.mensaje.replace(/
-/g, '<br>')}
-                </div>
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[10px] text-slate-600 leading-relaxed font-sans max-h-24 overflow-y-auto whitespace-pre-line">${p.mensaje}</div>
             `;
             document.getElementById('colaCardActual').innerHTML = cardHtml;
             document.getElementById('colaBtnAbrirWsp').href = p.whatsapp_url;
@@ -1400,13 +1397,15 @@
                 rubroNombre = "Centro Turístico y Resort";
             }
 
-            const textoPrueba = `Hola! Soy Luis, desarrollador web de la V Región.
-
-Te preparé una maqueta de muestra interactiva especialmente adaptada para ${rubroNombre}:
-${urlMaqueta}
-
-Incluye catálogo, reservas online y botón directo a tu WhatsApp. ¿Qué te parece?`;
-            const cleanTel = tel.replace(/\+/g, '').replace(/\s/g, '').replace(/-/g, '');
+                        const textoPrueba = [
+                "Hola! Soy Luis, desarrollador web de la V Región.",
+                "",
+                "Te preparé una maqueta de muestra interactiva adaptada para " + rubroNombre + ":",
+                urlMaqueta,
+                "",
+                "Incluye catálogo, reservas online y botón directo a tu WhatsApp. ¿Qué te parece?"
+            ].join(String.fromCharCode(10));
+            const cleanTel = tel.split("+").join("").split(" ").join("").split("-").join("");
             const finalUrl = `https://api.whatsapp.com/send?phone=${cleanTel}&text=${encodeURIComponent(textoPrueba)}`;
             window.open(finalUrl, '_blank');
         }
@@ -1440,13 +1439,12 @@ Incluye catálogo, reservas online y botón directo a tu WhatsApp. ¿Qué te par
             container.innerHTML = html;
         }
 
-        function descargarCSVProspectos() {
-            let csv = "ID,Negocio,Rubro,Comuna,Dirección,Teléfono,WhatsApp Link
-";
+                function descargarCSVProspectos() {
+            const rows = ["ID,Negocio,Rubro,Comuna,Dirección,Teléfono,WhatsApp Link"];
             PROSPECTOS.forEach(p => {
-                csv += `"${p.id}","${(p.nombre||'').replace(/"/g, '""')}","${p.rubro}","${p.comuna}","${(p.direccion||'').replace(/"/g, '""')}","${p.telefono_formato}","${p.whatsapp_url}"
-`;
+                rows.push(`"${p.id}","${(p.nombre||'').split('"').join('""')}","${p.rubro}","${p.comuna}","${(p.direccion||'').split('"').join('""')}","${p.telefono_formato}","${p.whatsapp_url}"`);
             });
+            const csv = rows.join(String.fromCharCode(10));
             const blob = new Blob(["﻿" + csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
