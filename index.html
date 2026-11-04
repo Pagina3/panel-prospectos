@@ -425,6 +425,27 @@
 
                 <!-- 2. SUBTAB: BOT PC (CONTROL DE SCRIPT PLAYWRIGHT / EDGE) -->
                 <div id="subtab-content-pc" class="hidden space-y-3">
+                    <!-- Notificación de Modo Remoto vs Local -->
+                    <div id="pcRemoteNotice" class="hidden bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 p-3.5 rounded-2xl">
+                        <div class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-laptop-code text-indigo-600 text-lg mt-0.5"></i>
+                            <div class="flex-1">
+                                <h4 class="font-black text-xs text-indigo-950">¡Abre el Panel Local en tu PC para control 1-clic!</h4>
+                                <p class="text-[11px] text-indigo-800 mt-0.5 leading-relaxed">
+                                    Por seguridad de los navegadores, las páginas web remotas (GitHub Pages HTTPS) no pueden dar órdenes directas a tu computador. Para iniciar el bot con 1 clic y ver los logs en vivo, abre tu Panel Local:
+                                </p>
+                                <div class="mt-2.5 flex flex-wrap gap-2">
+                                    <a href="http://127.0.0.1:5050/" target="_blank" class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm transition">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Panel en mi PC (http://127.0.0.1:5050)
+                                    </a>
+                                </div>
+                                <span class="text-[10px] text-indigo-600 font-semibold block mt-1.5">
+                                    <i class="fa-solid fa-circle-info"></i> Recuerda hacer doble clic en 'Iniciar_Bot_WhatsApp.bat' en tu Escritorio para iniciarlo.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Estado de Conexión Local -->
                     <div id="bridgeStatusBanner" class="p-3 rounded-2xl border flex items-center justify-between text-xs bg-slate-50 border-slate-200">
                         <div class="flex items-center gap-2">
@@ -1320,16 +1341,33 @@
             copiarAlPortapapeles(cmd, "Comando copiado al portapapeles");
         }
 
+        function getApiUrl(path) {
+            const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+            return isLocal ? path : 'http://127.0.0.1:5050' + path;
+        }
+
         async function verificarPuenteLocal() {
             const dot = document.getElementById('bridgeStatusDot');
             const txt = document.getElementById('bridgeStatusText');
             const sub = document.getElementById('bridgeStatusSub');
             const logsBox = document.getElementById('pcLogsBox');
+            const notice = document.getElementById('pcRemoteNotice');
+            const isHttps = window.location.protocol === 'https:';
+
+            if (isHttps) {
+                if (notice) notice.classList.remove('hidden');
+                dot.className = "w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse";
+                txt.textContent = "📡 Vista Remota (GitHub Pages)";
+                sub.innerHTML = `Para 1-clic abre <a href="http://127.0.0.1:5050/" target="_blank" class="underline font-bold text-indigo-600">http://127.0.0.1:5050</a>`;
+                return;
+            } else {
+                if (notice) notice.classList.add('hidden');
+            }
 
             try {
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 1200);
-                const res = await fetch('http://127.0.0.1:5050/api/status', { signal: controller.signal });
+                const res = await fetch(getApiUrl('/api/status'), { signal: controller.signal });
                 clearTimeout(timeoutId);
 
                 if (res.ok) {
@@ -1338,10 +1376,10 @@
                     dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
                     if (data.running) {
                         txt.textContent = `🟢 Bot Corriendo en PC (PID: ${data.pid})`;
-                        sub.textContent = `Modo: ${data.modo} · Límite: ${data.limite}`;
+                        sub.textContent = `Modo: ${data.modo} · Límite: ${data.limite} mensajes`;
                     } else {
-                        txt.textContent = "🟢 Puente PC Conectado (127.0.0.1:5050)";
-                        sub.textContent = "Listo para ejecutar órdenes desde la web";
+                        txt.textContent = "🟢 Panel Local PC Conectado (127.0.0.1:5050)";
+                        sub.textContent = "Listo para iniciar envíos con 1 clic";
                     }
 
                     if (data.logs && data.logs.length > 0) {
@@ -1357,35 +1395,47 @@
             bridgeConnected = false;
             dot.className = "w-2.5 h-2.5 rounded-full bg-slate-400";
             txt.textContent = "⚪ Servidor PC en Reposo";
-            sub.textContent = "Ejecuta iniciar_bot.bat en tu PC o copia el comando";
+            sub.textContent = "Ejecuta Iniciar_Bot_WhatsApp.bat en tu PC";
         }
 
         async function ejecutarBotPC() {
             const modo = document.getElementById('pcModoSelect').value;
             const limite = parseInt(document.getElementById('pcLimiteSelect').value) || 10;
             const comuna = document.getElementById('pcComunaSelect').value;
+            const isHttps = window.location.protocol === 'https:';
+
+            if (isHttps) {
+                alert("Estás en la versión remota de GitHub Pages. Para iniciar el bot con 1 clic directo en tu pantalla, abre el archivo 'Iniciar_Bot_WhatsApp.bat' en tu Escritorio o abre http://127.0.0.1:5050 en tu navegador.");
+                window.open("http://127.0.0.1:5050/", "_blank");
+                return;
+            }
 
             try {
-                const res = await fetch('http://127.0.0.1:5050/api/ejecutar', {
+                const res = await fetch(getApiUrl('/api/ejecutar'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ modo, limite, comuna })
                 });
                 const data = await res.json();
                 if (res.ok) {
-                    mostrarToast("Bot iniciado en tu PC!");
+                    mostrarToast("¡Bot iniciado en tu PC!");
                     verificarPuenteLocal();
                 } else {
                     alert("Aviso: " + (data.error || "No se pudo iniciar"));
                 }
             } catch(e) {
-                alert("Para iniciar el bot con 1 clic desde esta página, primero abre el archivo 'iniciar_bot.bat' y selecciona la opción 1 (Puente Web). O copia el comando para tu terminal.");
+                alert("Para iniciar el bot con 1 clic desde esta página, primero abre 'Iniciar_Bot_WhatsApp.bat' en tu PC.");
             }
         }
 
         async function detenerBotPC() {
+            const isHttps = window.location.protocol === 'https:';
+            if (isHttps) {
+                alert("Para detener el bot, hazlo desde tu Panel Local (http://127.0.0.1:5050) o cierra la ventana de consola en tu PC.");
+                return;
+            }
             try {
-                const res = await fetch('http://127.0.0.1:5050/api/detener', { method: 'POST' });
+                const res = await fetch(getApiUrl('/api/detener'), { method: 'POST' });
                 const data = await res.json();
                 mostrarToast(data.mensaje || "Bot detenido");
                 verificarPuenteLocal();
