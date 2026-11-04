@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Prospectos Pro | V Región</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,127 +39,139 @@
 </head>
 <body class="bg-slate-100 text-slate-800 pb-24 min-h-screen">
 
-    <!-- TOP HEADER BAR MOBILE -->
-    <header class="sticky top-0 z-40 bg-slate-900 text-white px-4 py-3 shadow-lg border-b border-slate-800">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-bold text-slate-950 text-base shadow-md shadow-emerald-500/20">
-                    <i class="fa-solid fa-briefcase"></i>
+    <!-- TOP HEADER BAR (RESPONSIVE PC & MÓVIL) -->
+    <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-lg border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 md:w-11 md:h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-bold text-slate-950 text-base md:text-lg shadow-md shadow-emerald-500/20 shrink-0">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-sm md:text-base font-black leading-tight text-white flex items-center gap-1.5">
+                            <span>Prospector Regional</span>
+                            <span class="text-[9px] md:text-[10px] bg-emerald-500/20 text-emerald-300 font-extrabold px-2 py-0.5 rounded-full border border-emerald-500/30">PRO CRM</span>
+                        </h1>
+                        <p class="text-[10px] md:text-xs text-slate-400 font-medium">50 Clientes Verificados · 100% WhatsApp Móvil & PC</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-sm font-black leading-tight text-white flex items-center gap-1.5">
-                        <span>Prospector Regional</span>
-                        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-extrabold px-1.5 py-0.5 rounded-full border border-emerald-500/30">PRO</span>
-                    </h1>
-                    <p class="text-[10px] text-slate-400 font-medium">50 Clientes Verificados · 100% WhatsApp Móvil</p>
+
+                <!-- TOP ACTIONS -->
+                <div class="flex items-center gap-2">
+                    <button onclick="descargarCSVProspectos()" class="hidden md:inline-flex bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-xs px-3 py-2 rounded-xl items-center gap-1.5 border border-slate-700/80 transition active:scale-95">
+                        <i class="fa-solid fa-download text-xs text-emerald-400"></i>
+                        <span>Exportar CSV</span>
+                    </button>
+                    <button onclick="abrirModalBot()" class="bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-black text-xs px-3 py-2 rounded-xl flex items-center gap-2 shadow-md shadow-emerald-500/25 active:scale-95 transition">
+                        <i class="fa-brands fa-whatsapp text-sm md:text-base text-emerald-100"></i>
+                        <span>Bot WhatsApp</span>
+                        <span class="bg-emerald-950/40 text-[9px] font-mono px-1.5 py-0.5 rounded text-emerald-200">1-50</span>
+                    </button>
+                    <button onclick="abrirModalOpciones()" title="Configuración" class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700/80 transition active:scale-95">
+                        <i class="fa-solid fa-gear text-xs md:text-sm"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- BOT WHATSAPP & SETTINGS BUTTONS -->
-            <div class="flex items-center gap-1.5">
-                <button onclick="abrirModalBot()" class="bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-black text-[11px] px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md shadow-emerald-500/25 active:scale-95 transition">
-                    <i class="fa-brands fa-whatsapp text-sm text-emerald-100"></i>
-                    <span>Bot WhatsApp</span>
-                    <span class="bg-emerald-950/40 text-[8px] font-mono px-1 py-0.2 rounded text-emerald-200">1-50</span>
-                </button>
-                <button onclick="abrirModalOpciones()" title="Configuración" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700/80 transition active:scale-95">
-                    <i class="fa-solid fa-gear text-xs"></i>
-                </button>
+            <!-- QUICK DEMOS ACCORDION / PILLS (RESPONSIVE) -->
+            <div class="mt-2.5 pt-2 border-t border-slate-800 flex gap-2 overflow-x-auto hide-scroll md:flex-wrap md:overflow-visible items-center">
+                <span class="hidden lg:inline-flex text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-pink-400 mr-1"></i> Maquetas en Vivo:
+                </span>
+                <a href="https://pagina3.github.io/muestra-estetica/" target="_blank" class="whitespace-nowrap bg-pink-950/80 hover:bg-pink-900 border border-pink-600/70 text-pink-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm transition hover:scale-102">
+                    <i class="fa-solid fa-scissors text-pink-400"></i> Demo Peluquería & Estética <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+                </a>
+                <a href="https://pagina3.github.io/muestra-restaurante/" target="_blank" class="whitespace-nowrap bg-red-950/70 hover:bg-red-900 border border-red-700/60 text-red-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm transition hover:scale-102">
+                    <i class="fa-solid fa-utensils text-red-400"></i> Demo Restaurante <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+                </a>
+                <a href="https://pagina3.github.io/muestra-cabana/" target="_blank" class="whitespace-nowrap bg-emerald-950/70 hover:bg-emerald-900 border border-emerald-700/60 text-emerald-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm transition hover:scale-102">
+                    <i class="fa-solid fa-house-chimney text-emerald-400"></i> Demo Cabañas <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+                </a>
+                <a href="https://pagina3.github.io/muestra-rancho/" target="_blank" class="whitespace-nowrap bg-cyan-950/70 hover:bg-cyan-900 border border-cyan-700/60 text-cyan-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm transition hover:scale-102">
+                    <i class="fa-solid fa-water-ladder text-cyan-400"></i> Demo Rancho / Resort <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
+                </a>
             </div>
-        </div>
-
-        <!-- QUICK DEMOS ACCORDION / PILLS -->
-        <div class="mt-2.5 pt-2 border-t border-slate-800 flex gap-2 overflow-x-auto hide-scroll">
-            <a href="https://pagina3.github.io/muestra-estetica/" target="_blank" class="whitespace-nowrap bg-pink-950/80 hover:bg-pink-900 border border-pink-600/70 text-pink-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
-                <i class="fa-solid fa-scissors text-pink-400"></i> Demo Peluquería & Estética <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
-            </a>
-            <a href="https://pagina3.github.io/muestra-restaurante/" target="_blank" class="whitespace-nowrap bg-red-950/70 hover:bg-red-900 border border-red-700/60 text-red-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
-                <i class="fa-solid fa-utensils text-red-400"></i> Demo Restaurante <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
-            </a>
-            <a href="https://pagina3.github.io/muestra-cabana/" target="_blank" class="whitespace-nowrap bg-emerald-950/70 hover:bg-emerald-900 border border-emerald-700/60 text-emerald-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
-                <i class="fa-solid fa-house-chimney text-emerald-400"></i> Demo Cabañas <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
-            </a>
-            <a href="https://pagina3.github.io/muestra-rancho/" target="_blank" class="whitespace-nowrap bg-cyan-950/70 hover:bg-cyan-900 border border-cyan-700/60 text-cyan-200 text-[11px] font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
-                <i class="fa-solid fa-water-ladder text-cyan-400"></i> Demo Rancho / Resort <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i>
-            </a>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-md mx-auto px-3.5 pt-3">
+    <!-- MAIN CONTAINER (MAX WIDTH 7XL FOR PC & ADAPTABLE MOBILE) -->
+    <main class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-3 sm:pt-5">
 
-        <!-- BANNER DISPARADOR BOT WHATSAPP -->
-        <div class="bg-gradient-to-r from-slate-900 via-emerald-950/90 to-slate-900 border border-emerald-500/30 rounded-2xl p-3 mb-3 text-white flex items-center justify-between shadow-sm">
-            <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base border border-emerald-500/30 shrink-0">
+        <!-- BANNER DISPARADOR BOT WHATSAPP (RESPONSIVE) -->
+        <div class="bg-gradient-to-r from-slate-900 via-emerald-950/90 to-slate-900 border border-emerald-500/30 rounded-2xl md:rounded-3xl p-3.5 md:p-5 mb-4 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg md:text-xl border border-emerald-500/30 shrink-0">
                     <i class="fa-solid fa-robot"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-xs font-black text-white">Menú Bot & Envíos WhatsApp</span>
-                        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-1.5 rounded font-bold">1 a 50</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs md:text-sm font-black text-white">Centro de Envíos & Automatización WhatsApp</span>
+                        <span class="text-[9px] md:text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-bold">Lotes 1 a 50</span>
                     </div>
-                    <p class="text-[10px] text-slate-300 leading-tight">Envío masivo en tu móvil o control del bot en PC</p>
+                    <p class="text-[11px] md:text-xs text-slate-300 mt-0.5 leading-tight">Envío masivo asistido en tu celular o control total del bot en tu PC con Edge y Playwright</p>
                 </div>
             </div>
-            <button onclick="abrirModalBot()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black px-2.5 py-1.5 rounded-xl flex items-center gap-1 shadow-sm active:scale-95 transition shrink-0">
-                <span>Abrir</span>
-                <i class="fa-solid fa-chevron-right text-[8px]"></i>
-            </button>
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end shrink-0">
+                <button onclick="abrirModalBot()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-black px-4 py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/30 transition">
+                    <i class="fa-solid fa-play text-[10px]"></i>
+                    <span>Abrir Menú Bot</span>
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- 5 PESTAÑAS PRINCIPALES (STICKY CONTROL) -->
-        <div class="p-1 bg-slate-900/95 backdrop-blur-md rounded-2xl border border-slate-800 mb-3 shadow-md grid grid-cols-5 gap-1">
-            <button onclick="cambiarTab('pendientes')" id="tab-btn-pendientes" class="tab-nav-btn active py-2 rounded-xl text-[9px] font-bold text-center transition flex flex-col items-center justify-center gap-0.5 text-slate-300">
-                <div class="flex items-center gap-0.5">
-                    <i class="fa-solid fa-clock-rotate-left text-[8px]"></i>
+        <!-- 5 PESTAÑAS PRINCIPALES (STICKY CONTROL RESPONSIVE PC & MÓVIL) -->
+        <div class="p-1 md:p-1.5 bg-slate-900/95 backdrop-blur-md rounded-2xl md:rounded-3xl border border-slate-800 mb-4 shadow-lg grid grid-cols-5 gap-1 md:gap-2 sticky top-[72px] md:top-[84px] z-30">
+            <button onclick="cambiarTab('pendientes')" id="tab-btn-pendientes" class="tab-nav-btn active py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-clock-rotate-left text-[8px] md:text-xs"></i>
                     <span>Pendientes</span>
                 </div>
-                <span id="tab-badge-pendientes" class="bg-emerald-500 text-slate-950 font-black px-1.5 py-0.2 rounded-full text-[8px]">50</span>
+                <span id="tab-badge-pendientes" class="bg-emerald-500 text-slate-950 font-black px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">50</span>
             </button>
-            <button onclick="cambiarTab('contactados')" id="tab-btn-contactados" class="tab-nav-btn py-2 rounded-xl text-[9px] font-bold text-center transition flex flex-col items-center justify-center gap-0.5 text-slate-300">
-                <div class="flex items-center gap-0.5">
-                    <i class="fa-solid fa-circle-check text-[8px]"></i>
+            <button onclick="cambiarTab('contactados')" id="tab-btn-contactados" class="tab-nav-btn py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[8px] md:text-xs"></i>
                     <span>Enviados</span>
                 </div>
-                <span id="tab-badge-contactados" class="bg-slate-800 text-slate-400 font-bold px-1.5 py-0.2 rounded-full text-[8px]">0</span>
+                <span id="tab-badge-contactados" class="bg-slate-800 text-slate-400 font-bold px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">0</span>
             </button>
-            <button onclick="cambiarTab('pedidos')" id="tab-btn-pedidos" class="tab-nav-btn py-2 rounded-xl text-[9px] font-bold text-center transition flex flex-col items-center justify-center gap-0.5 text-slate-300">
-                <div class="flex items-center gap-0.5">
-                    <i class="fa-solid fa-bell text-[8px] text-amber-400"></i>
+            <button onclick="cambiarTab('pedidos')" id="tab-btn-pedidos" class="tab-nav-btn py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-bell text-[8px] md:text-xs text-amber-400"></i>
                     <span>Pedidos</span>
                 </div>
-                <span id="tab-badge-pedidos" class="bg-amber-500 text-slate-950 font-black px-1.5 py-0.2 rounded-full text-[8px]">0</span>
+                <span id="tab-badge-pedidos" class="bg-amber-500 text-slate-950 font-black px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">0</span>
             </button>
-            <button onclick="cambiarTab('demos')" id="tab-btn-demos" class="tab-nav-btn py-2 rounded-xl text-[9px] font-bold text-center transition flex flex-col items-center justify-center gap-0.5 text-slate-300">
-                <div class="flex items-center gap-0.5">
-                    <i class="fa-solid fa-wand-magic-sparkles text-[8px] text-pink-400"></i>
+            <button onclick="cambiarTab('demos')" id="tab-btn-demos" class="tab-nav-btn py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[8px] md:text-xs text-pink-400"></i>
                     <span>Demos</span>
                 </div>
-                <span id="tab-badge-demos" class="bg-pink-500 text-white font-black px-1.5 py-0.2 rounded-full text-[8px]">4</span>
+                <span id="tab-badge-demos" class="bg-pink-500 text-white font-black px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">4</span>
             </button>
-            <button onclick="cambiarTab('todos')" id="tab-btn-todos" class="tab-nav-btn py-2 rounded-xl text-[9px] font-bold text-center transition flex flex-col items-center justify-center gap-0.5 text-slate-300">
-                <div class="flex items-center gap-0.5">
-                    <i class="fa-solid fa-list-check text-[8px]"></i>
+            <button onclick="cambiarTab('todos')" id="tab-btn-todos" class="tab-nav-btn py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
+                <div class="flex items-center gap-1">
+                    <i class="fa-solid fa-list-check text-[8px] md:text-xs"></i>
                     <span>Todos</span>
                 </div>
-                <span id="tab-badge-todos" class="bg-slate-800 text-slate-400 font-bold px-1.5 py-0.2 rounded-full text-[8px]">50</span>
+                <span id="tab-badge-todos" class="bg-slate-800 text-slate-400 font-bold px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">50</span>
             </button>
         </div>
 
-        <div id="filtrosContainer">
-        <!-- SEARCH INPUT -->
-        <div class="relative mb-2.5">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-            <input type="text" id="searchInput" oninput="filtrarProspectos()" placeholder="Buscar negocio, comuna o rubro..." 
-                   class="w-full bg-white border border-slate-300 rounded-2xl pl-9 pr-8 py-2.5 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 shadow-sm">
-            <button onclick="limpiarBusqueda()" id="clearBtn" class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-600">
-                <i class="fa-solid fa-xmark text-sm"></i>
+        <div id="filtrosContainer" class="mb-4">
+        <!-- SEARCH INPUT (RESPONSIVE) -->
+        <div class="relative mb-3">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 md:top-3.5 text-slate-400 text-xs md:text-sm"></i>
+            <input type="text" id="searchInput" oninput="filtrarProspectos()" placeholder="Buscar por negocio, comuna, rubro o dirección..." 
+                   class="w-full bg-white border border-slate-300 rounded-2xl pl-9 md:pl-10 pr-9 py-2.5 md:py-3 text-xs md:text-sm font-medium text-slate-800 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 shadow-sm">
+            <button onclick="limpiarBusqueda()" id="clearBtn" class="hidden absolute right-3 top-2.5 md:top-3 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-sm md:text-base"></i>
             </button>
         </div>
 
         <!-- COMUNA FILTER PILLS -->
-        <div class="flex gap-1.5 overflow-x-auto hide-scroll pb-1 mb-2">
+        <div class="flex gap-1.5 overflow-x-auto hide-scroll md:flex-wrap md:overflow-visible pb-1 mb-2">
             <button onclick="filtrarComuna('todas')" class="comuna-pill active whitespace-nowrap bg-slate-900 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-sm">
                 Todas las Comunas
             </button>
@@ -208,7 +220,7 @@
         </div>
 
         <!-- RUBRO FILTER PILLS -->
-        <div class="flex gap-1.5 overflow-x-auto hide-scroll pb-2 mb-3">
+        <div class="flex gap-1.5 overflow-x-auto hide-scroll md:flex-wrap md:overflow-visible pb-2 mb-4">
             <button onclick="filtrarRubro('todos')" class="rubro-pill active whitespace-nowrap bg-emerald-700 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-sm">
                 Todos los Rubros
             </button>
@@ -234,8 +246,8 @@
 
         </div><!-- /filtrosContainer -->
 
-        <!-- CARDS CONTAINER -->
-        <div id="cardsList" class="space-y-3">
+        <!-- CARDS CONTAINER (RESPONSIVE GRID PC & MÓVIL) -->
+        <div id="cardsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 md:gap-4 items-stretch">
             <!-- Renderizado dinámicamente con JS -->
         </div>
 
@@ -288,7 +300,7 @@
 
     <!-- MODAL COMPLETO DEL BOT & AUTOMATIZACIÓN WHATSAPP -->
     <div id="modalBot" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-md w-full p-4 sm:p-5 shadow-2xl border border-slate-200 my-auto max-h-[92vh] flex flex-col">
+        <div class="bg-white rounded-3xl max-w-md md:max-w-2xl lg:max-w-3xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto max-h-[92vh] flex flex-col">
             <!-- Modal Header -->
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                 <div class="flex items-center gap-2">
@@ -644,7 +656,7 @@
                 const pedidosLista = Object.entries(PEDIDOS_DATA);
                 if (pedidosLista.length === 0) {
                     container.innerHTML = `
-                        <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-amber-300 p-6 shadow-sm">
+                        <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed border-amber-300 p-6 shadow-sm">
                             <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-3">
                                 <i class="fa-solid fa-bell text-xl"></i>
                             </div>
@@ -708,25 +720,29 @@
                 actualizarContadores();
                 return;
             }
-            // RENDERIZADO ESPECIAL DE PESTAÑA DEMOS
+            // RENDERIZADO ESPECIAL DE PESTAÑA DEMOS (RESPONSIVE GRID)
             if (tabActiva === 'demos') {
                 container.innerHTML = `
-                    <div class="space-y-3.5">
-                        <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-4 rounded-3xl border border-slate-700 shadow-sm">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[10px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 px-2.5 py-0.5 rounded-full inline-block">
-                                    ✨ Maquetas Web en Vivo
-                                </span>
-                                <span class="text-[10px] text-slate-400">4 Diseños Disponibles</span>
+                    <div class="col-span-full space-y-4">
+                        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-4 md:p-6 rounded-3xl border border-slate-700 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-[10px] md:text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 px-2.5 py-0.5 rounded-full inline-block">
+                                        ✨ Maquetas Web en Vivo
+                                    </span>
+                                    <span class="text-[10px] md:text-xs text-slate-400">4 Diseños Disponibles</span>
+                                </div>
+                                <h2 class="text-sm md:text-lg font-black text-white">Catálogo de Maquetas para Mostrar al Cliente</h2>
+                                <p class="text-[11px] md:text-xs text-slate-300 mt-0.5 leading-relaxed max-w-2xl">
+                                    Ábrelas en tu celular o PC para mostrárselas al cliente, copia el enlace al portapapeles o envíaselas directo por WhatsApp en 1 clic.
+                                </p>
                             </div>
-                            <h2 class="text-sm font-black text-white">Catálogo de Maquetas para Mostrar al Cliente</h2>
-                            <p class="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                                Ábrelas en tu celular para mostrárselas al cliente, copia el enlace al portapapeles o envíaselas directo por WhatsApp en 1 clic.
-                            </p>
                         </div>
 
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+
                         <!-- DEMO 1: Salón de Belleza, Peluquería & Estética -->
-                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-pink-300 shadow-sm space-y-3">
+                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-pink-300 shadow-sm space-y-3 flex flex-col justify-between h-full">
                             <div class="flex justify-between items-start gap-2">
                                 <div>
                                     <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-800 border border-pink-200">
@@ -754,7 +770,7 @@
                         </div>
 
                         <!-- DEMO 2: Restaurante & Carta QR -->
-                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-amber-300 shadow-sm space-y-3">
+                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-amber-300 shadow-sm space-y-3 flex flex-col justify-between h-full">
                             <div class="flex justify-between items-start gap-2">
                                 <div>
                                     <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
@@ -782,7 +798,7 @@
                         </div>
 
                         <!-- DEMO 3: Cabañas & Tinajas -->
-                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-emerald-300 shadow-sm space-y-3">
+                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-emerald-300 shadow-sm space-y-3 flex flex-col justify-between h-full">
                             <div class="flex justify-between items-start gap-2">
                                 <div>
                                     <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
@@ -810,24 +826,26 @@
                         </div>
 
                         <!-- DEMO 4: Hotel Club Rancho Los Olivos -->
-                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-cyan-300 shadow-sm space-y-3">
-                            <div class="flex justify-between items-start gap-2">
-                                <div>
-                                    <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-200">
-                                        🏊‍♂️ Resort, Piscinas & Hotel
-                                    </span>
-                                    <h3 class="text-sm font-black text-slate-900 mt-1">Hotel Club Rancho Los Olivos</h3>
-                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-tight">Hotel, cabañas, piscinas temperadas, toboganes & pases diarios</p>
+                        <div class="card-anim bg-white rounded-3xl p-4 border-2 border-cyan-300 shadow-sm space-y-3 flex flex-col justify-between h-full">
+                            <div>
+                                <div class="flex justify-between items-start gap-2">
+                                    <div>
+                                        <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-200">
+                                            🏊‍♂️ Resort, Piscinas & Hotel
+                                        </span>
+                                        <h3 class="text-sm font-black text-slate-900 mt-1">Hotel Club Rancho Los Olivos</h3>
+                                        <p class="text-[11px] text-slate-500 mt-0.5 leading-tight">Hotel, cabañas, piscinas temperadas, toboganes & pases diarios</p>
+                                    </div>
+                                    <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full shrink-0">✓ En Vivo</span>
                                 </div>
-                                <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full shrink-0">✓ En Vivo</span>
+                                <div class="text-[10px] text-slate-500 bg-slate-50 p-2 rounded-xl border border-slate-200/80 flex items-center justify-between mt-2.5">
+                                    <span class="truncate pr-2 font-mono text-slate-700">https://pagina3.github.io/muestra-rancho/</span>
+                                    <button onclick="copiarAlPortapapeles('https://pagina3.github.io/muestra-rancho/', 'Link de Rancho copiado')" class="text-cyan-700 hover:text-cyan-900 font-bold shrink-0 flex items-center gap-1 active:scale-95">
+                                        <i class="fa-solid fa-copy"></i> Copiar
+                                    </button>
+                                </div>
                             </div>
-                            <div class="text-[10px] text-slate-500 bg-slate-50 p-2 rounded-xl border border-slate-200/80 flex items-center justify-between">
-                                <span class="truncate pr-2 font-mono text-slate-700">https://pagina3.github.io/muestra-rancho/</span>
-                                <button onclick="copiarAlPortapapeles('https://pagina3.github.io/muestra-rancho/', 'Link de Rancho copiado')" class="text-cyan-700 hover:text-cyan-900 font-bold shrink-0 flex items-center gap-1 active:scale-95">
-                                    <i class="fa-solid fa-copy"></i> Copiar
-                                </button>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-2 gap-2 pt-2">
                                 <a href="https://pagina3.github.io/muestra-rancho/" target="_blank" class="bg-cyan-700 hover:bg-cyan-800 active:scale-95 text-white font-bold py-2.5 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
                                     <i class="fa-solid fa-eye text-xs"></i> Abrir Maqueta
                                 </a>
@@ -836,7 +854,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                        </div><!-- /grid demos -->
+                    </div><!-- /col-span-full -->
                 `;
                 actualizarContadores();
                 return;
@@ -866,7 +885,7 @@
                 let mensajeVacio = '';
                 if (tabActiva === 'pendientes') {
                     mensajeVacio = `
-                        <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-emerald-200 p-6 shadow-sm">
+                        <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed border-emerald-200 p-6 shadow-sm">
                             <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-3">
                                 <i class="fa-solid fa-trophy text-xl"></i>
                             </div>
@@ -878,7 +897,7 @@
                     `;
                 } else if (tabActiva === 'contactados') {
                     mensajeVacio = `
-                        <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-slate-300 p-6 shadow-sm">
+                        <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed border-slate-300 p-6 shadow-sm">
                             <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
                                 <i class="fa-solid fa-paper-plane text-xl"></i>
                             </div>
@@ -890,7 +909,7 @@
                     `;
                 } else {
                     mensajeVacio = `
-                        <div class="text-center py-10 bg-white rounded-3xl border border-dashed border-slate-300 p-6 shadow-sm">
+                        <div class="col-span-full text-center py-10 bg-white rounded-3xl border border-dashed border-slate-300 p-6 shadow-sm">
                             <i class="fa-solid fa-filter-circle-xmark text-slate-400 text-2xl mb-2"></i>
                             <h3 class="text-xs font-bold text-slate-700">Sin resultados</h3>
                             <p class="text-[11px] text-slate-400 mt-0.5">Prueba cambiando la comuna o limpiando la búsqueda.</p>
@@ -912,7 +931,7 @@
                                    p.rubro === 'Servicios' ? 'bg-blue-100 text-blue-800 border-blue-200' : 'bg-purple-100 text-purple-800 border-purple-200';
 
                 html += `
-                    <div id="card-${p.id}" class="card-anim bg-white rounded-3xl p-4 border border-slate-200/90 shadow-sm">
+                    <div id="card-${p.id}" class="card-anim bg-white rounded-3xl p-4 md:p-5 border border-slate-200/90 hover:border-emerald-500/80 hover:shadow-lg shadow-sm flex flex-col justify-between h-full transition duration-200">
                         
                         <!-- HEADER TARJETA -->
                         <div class="flex justify-between items-start gap-2 mb-2">
@@ -957,7 +976,7 @@
                         </div>
 
                         <!-- ACCIONES DIRECTAS WHATSAPP Y GESTIÓN -->
-                        <div class="space-y-2">
+                        <div class="space-y-2 mt-auto pt-3 border-t border-slate-100">
                             <div class="grid grid-cols-5 gap-2">
                                 <a href="${p.whatsapp_url}" target="_blank" onclick="onAbrirWhatsApp('${p.id}')" 
                                    class="col-span-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-2.5 px-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition">
