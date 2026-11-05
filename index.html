@@ -344,10 +344,10 @@
                 <div id="subtab-content-movil" class="space-y-3">
                     <div class="bg-emerald-50/70 border border-emerald-200 p-3 rounded-2xl">
                         <span class="font-bold text-emerald-900 block flex items-center gap-1.5 mb-1">
-                            <i class="fa-solid fa-bolt text-emerald-600"></i> Lanzador de Envíos en tu Celular
+                            <i class="fa-solid fa-bolt text-emerald-600"></i> Lanzador Web Directo (PC y Celular)
                         </span>
                         <p class="text-[11px] text-emerald-800 leading-relaxed">
-                            Envía mensajes en tanda directamente desde tu WhatsApp móvil sin depender de tener la computadora prendida.
+                            Envía mensajes en tanda directamente desde tu navegador (PC o celular) sin necesidad de abrir terminales ni servidores. Abre WhatsApp con el mensaje listo con 1 solo clic.
                         </p>
                     </div>
 
@@ -380,7 +380,7 @@
                         </div>
 
                         <button onclick="iniciarColaMovil()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black py-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition">
-                            <i class="fa-solid fa-play"></i> Iniciar Cola de Envíos en Móvil
+                            <i class="fa-solid fa-play"></i> Iniciar Cola de Envíos en Navegador
                         </button>
                     </div>
 
@@ -1295,7 +1295,12 @@
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[10px] text-slate-600 leading-relaxed font-sans max-h-24 overflow-y-auto whitespace-pre-line">${p.mensaje}</div>
             `;
             document.getElementById('colaCardActual').innerHTML = cardHtml;
-            document.getElementById('colaBtnAbrirWsp').href = p.whatsapp_url;
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const telClean = (p.telefono || "").split("+").join("").split(" ").join("").split("-").join("");
+            const wspHref = isMobile 
+                ? `https://api.whatsapp.com/send?phone=${telClean}&text=${encodeURIComponent(p.mensaje)}`
+                : `https://web.whatsapp.com/send?phone=${telClean}&text=${encodeURIComponent(p.mensaje)}`;
+            document.getElementById('colaBtnAbrirWsp').href = wspHref;
         }
 
         function registrarEnvioColaActual() {
