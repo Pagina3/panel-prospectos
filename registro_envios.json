@@ -122,7 +122,7 @@
         "comuna": "Cabildo",
         "rubro": "Ferretería",
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
-        "fecha": "2026-11-04 21:14:47",
+        "fecha": "2026-11-04 21:22:31",
         "estado": "sin_whatsapp"
     },
     "tel_56981251504": {
@@ -131,7 +131,7 @@
         "comuna": "Cabildo",
         "rubro": "Gastronomía",
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
-        "fecha": "2026-11-03 15:47:36",
+        "fecha": "2026-11-04 21:23:24",
         "estado": "sin_whatsapp"
     },
     "tel_56979507817": {
@@ -149,7 +149,7 @@
         "comuna": "Pichicuy",
         "rubro": "Gastronomía",
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
-        "fecha": "2026-11-03 15:50:35",
+        "fecha": "2026-11-04 21:24:18",
         "estado": "sin_whatsapp"
     },
     "tel_56979330409": {
@@ -158,7 +158,7 @@
         "comuna": "Los Molles",
         "rubro": "Gastronomía",
         "demo_link": "https://pagina3.github.io/muestra-restaurante/",
-        "fecha": "2026-11-03 15:51:42",
+        "fecha": "2026-11-04 21:25:09",
         "estado": "sin_whatsapp"
     },
     "tel_56966008282": {
@@ -176,7 +176,7 @@
         "comuna": "Los Hornos",
         "rubro": "Turismo",
         "demo_link": "https://pagina3.github.io/muestra-cabana/",
-        "fecha": "2026-11-03 15:54:18",
+        "fecha": "2026-11-04 21:26:09",
         "estado": "sin_whatsapp"
     },
     "tel_56937024764": {
@@ -195,6 +195,51 @@
         "rubro": "Turismo",
         "demo_link": "https://pagina3.github.io/muestra-cabana/",
         "fecha": "2026-11-03 15:57:14",
+        "estado": "enviado"
+    },
+    "tel_56997415896": {
+        "nombre": "Restaurante La Pica de Adela",
+        "telefono": "+56 9 9741 5896",
+        "comuna": "Catapilco",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-04 21:27:21",
+        "estado": "enviado"
+    },
+    "tel_56998830988": {
+        "nombre": "Centro de Buceo Pintarroja",
+        "telefono": "+56 9 9883 0988",
+        "comuna": "Papudo",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-04 21:28:13",
+        "estado": "enviado"
+    },
+    "tel_56965071663": {
+        "nombre": "Las Pircas Pizzería",
+        "telefono": "+56 9 6507 1663",
+        "comuna": "Chincolco",
+        "rubro": "Gastronomía",
+        "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+        "fecha": "2026-11-04 21:29:27",
+        "estado": "enviado"
+    },
+    "tel_56976019676": {
+        "nombre": "Cabañas Yazmín",
+        "telefono": "+56 9 7601 9676",
+        "comuna": "Horcón",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-04 21:30:30",
+        "estado": "enviado"
+    },
+    "tel_56994740708": {
+        "nombre": "Cabañas La Puntilla Horcón",
+        "telefono": "+56 9 9474 0708",
+        "comuna": "Horcón",
+        "rubro": "Turismo",
+        "demo_link": "https://pagina3.github.io/muestra-cabana/",
+        "fecha": "2026-11-04 21:31:39",
         "estado": "enviado"
     }
 }
