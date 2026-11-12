@@ -157,14 +157,14 @@
                     <i class="fa-solid fa-wand-magic-sparkles text-[8px] md:text-xs text-pink-400"></i>
                     <span>Demos</span>
                 </div>
-                <span id="tab-badge-demos" class="bg-pink-500 text-white font-black px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">4</span>
+                <span id="tab-badge-demos" class="bg-pink-500 text-white font-black px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">7</span>
             </button>
             <button onclick="cambiarTab('todos')" id="tab-btn-todos" class="tab-nav-btn py-2 md:py-2.5 rounded-xl text-[9px] md:text-xs font-bold text-center transition flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-2 text-slate-300">
                 <div class="flex items-center gap-1">
                     <i class="fa-solid fa-list-check text-[8px] md:text-xs"></i>
                     <span>Todos</span>
                 </div>
-                <span id="tab-badge-todos" class="bg-slate-800 text-slate-400 font-bold px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">50</span>
+                <span id="tab-badge-todos" class="bg-slate-800 text-slate-400 font-bold px-1.5 md:px-2 py-0.2 rounded-full text-[8px] md:text-xs">240</span>
             </button>
         </div>
 
@@ -4462,36 +4462,321 @@
         let rubroActivo = 'todos';
         let PEDIDOS_DATA = {};
 
+        const BASE_ENVIADOS = {
+        "tel_56973149104": {
+                "nombre": "Restaurant Luilly",
+                "telefono": "+56 9 7314 9104",
+                "comuna": "Valle Hermoso",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 14:00:03",
+                "estado": "enviado"
+        },
+        "tel_56944712238": {
+                "nombre": "Brooota Restaurante",
+                "telefono": "+56 9 4471 2238",
+                "comuna": "La Ligua",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 14:01:05",
+                "estado": "enviado"
+        },
+        "tel_56979305815": {
+                "nombre": "Pastelería Recetas de Mi Nana",
+                "telefono": "+56 9 7930 5815",
+                "comuna": "La Ligua",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 14:02:29",
+                "estado": "enviado"
+        },
+        "tel_56993262121": {
+                "nombre": "Cabañas Cara Carü",
+                "telefono": "+56 9 9326 2121",
+                "comuna": "Valle Hermoso",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-03 14:03:48",
+                "estado": "enviado"
+        },
+        "tel_56981386533": {
+                "nombre": "Clínica Veterinaria Pet Medical",
+                "telefono": "+56 9 8138 6533",
+                "comuna": "La Ligua",
+                "rubro": "Veterinaria",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 14:05:29",
+                "estado": "enviado"
+        },
+        "tel_56994415870": {
+                "nombre": "Farmacia Veterinaria Paulinavet",
+                "telefono": "+56 9 9441 5870",
+                "comuna": "La Ligua",
+                "rubro": "Veterinaria",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 14:59:37",
+                "estado": "enviado"
+        },
+        "tel_56989024658": {
+                "nombre": "Vulcanización El Quero",
+                "telefono": "+56 9 8902 4658",
+                "comuna": "La Ligua",
+                "rubro": "Servicios",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:35:09",
+                "estado": "enviado"
+        },
+        "tel_56993296906": {
+                "nombre": "Cerrajería José Valenzuela",
+                "telefono": "+56 9 9329 6906",
+                "comuna": "La Ligua",
+                "rubro": "Servicios",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:36:15",
+                "estado": "enviado"
+        },
+        "tel_56985516641": {
+                "nombre": "Grúas & Fletes MAXFRA",
+                "telefono": "+56 9 8551 6641",
+                "comuna": "La Ligua",
+                "rubro": "Servicios",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:37:22",
+                "estado": "enviado"
+        },
+        "tel_56956269253": {
+                "nombre": "Taca Hair & Beauty",
+                "telefono": "+56 9 5626 9253",
+                "comuna": "La Ligua",
+                "rubro": "Estética",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:38:24",
+                "estado": "enviado"
+        },
+        "tel_56962906422": {
+                "nombre": "Barbería L'GANTE",
+                "telefono": "+56 9 6290 6422",
+                "comuna": "La Ligua",
+                "rubro": "Estética",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:40:04",
+                "estado": "enviado"
+        },
+        "tel_56959161821": {
+                "nombre": "Navaja Maestra",
+                "telefono": "+56 9 5916 1821",
+                "comuna": "La Ligua",
+                "rubro": "Estética",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:41:26",
+                "estado": "enviado"
+        },
+        "tel_56937343614": {
+                "nombre": "WAPA Nails & Studio Beauty",
+                "telefono": "+56 9 3734 3614",
+                "comuna": "La Ligua",
+                "rubro": "Estética",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-03 15:45:28",
+                "estado": "enviado"
+        },
+        "tel_56954980269": {
+                "nombre": "Ferretería Socitec",
+                "telefono": "+56 9 5498 0269",
+                "comuna": "Cabildo",
+                "rubro": "Ferretería",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:22:31",
+                "estado": "sin_whatsapp"
+        },
+        "tel_56981251504": {
+                "nombre": "Sushi Kim Cabildo",
+                "telefono": "+56 9 8125 1504",
+                "comuna": "Cabildo",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:23:24",
+                "estado": "sin_whatsapp"
+        },
+        "tel_56979507817": {
+                "nombre": "Cabañas Pichicuy RG",
+                "telefono": "+56 9 7950 7817",
+                "comuna": "Pichicuy",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-03 15:49:00",
+                "estado": "enviado"
+        },
+        "tel_56949492676": {
+                "nombre": "Cocinería & Marisquería Pichicuy",
+                "telefono": "+56 9 4949 2676",
+                "comuna": "Pichicuy",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:24:18",
+                "estado": "sin_whatsapp"
+        },
+        "tel_56979330409": {
+                "nombre": "Restaurante El Pirata Suizo",
+                "telefono": "+56 9 7933 0409",
+                "comuna": "Los Molles",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:25:09",
+                "estado": "sin_whatsapp"
+        },
+        "tel_56966008282": {
+                "nombre": "Camping & Cabañas Huaquén",
+                "telefono": "+56 9 6600 8282",
+                "comuna": "Huaquén",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-03 15:53:01",
+                "estado": "enviado"
+        },
+        "tel_56985934424": {
+                "nombre": "Cabañas Los Hornos de Huaquén",
+                "telefono": "+56 9 8593 4424",
+                "comuna": "Los Hornos",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-04 21:26:09",
+                "estado": "sin_whatsapp"
+        },
+        "tel_56937024764": {
+                "nombre": "Hotel Club Rancho Los Olivos",
+                "telefono": "+56 9 3702 4764",
+                "comuna": "Los Hornos",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-rancho/",
+                "fecha": "2026-11-03 15:55:59",
+                "estado": "enviado"
+        },
+        "tel_56995455963": {
+                "nombre": "Cabañas Figueroa Ibarra",
+                "telefono": "+56 9 9545 5963",
+                "comuna": "Catapilco",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-03 15:57:14",
+                "estado": "enviado"
+        },
+        "tel_56997415896": {
+                "nombre": "Restaurante La Pica de Adela",
+                "telefono": "+56 9 9741 5896",
+                "comuna": "Catapilco",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:27:21",
+                "estado": "enviado"
+        },
+        "tel_56998830988": {
+                "nombre": "Centro de Buceo Pintarroja",
+                "telefono": "+56 9 9883 0988",
+                "comuna": "Papudo",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-04 21:28:13",
+                "estado": "enviado"
+        },
+        "tel_56965071663": {
+                "nombre": "Las Pircas Pizzería",
+                "telefono": "+56 9 6507 1663",
+                "comuna": "Chincolco",
+                "rubro": "Gastronomía",
+                "demo_link": "https://pagina3.github.io/muestra-restaurante/",
+                "fecha": "2026-11-04 21:29:27",
+                "estado": "enviado"
+        },
+        "tel_56976019676": {
+                "nombre": "Cabañas Yazmín",
+                "telefono": "+56 9 7601 9676",
+                "comuna": "Horcón",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-04 21:30:30",
+                "estado": "enviado"
+        },
+        "tel_56994740708": {
+                "nombre": "Cabañas La Puntilla Horcón",
+                "telefono": "+56 9 9474 0708",
+                "comuna": "Horcón",
+                "rubro": "Turismo",
+                "demo_link": "https://pagina3.github.io/muestra-cabana/",
+                "fecha": "2026-11-04 21:31:39",
+                "estado": "enviado"
+        }
+};
+
         // Llaves de almacenamiento
         const STORAGE_KEY = 'crm_contactados_v5';
         const CONFIG_KEY = 'crm_config_v5';
 
         function getContactados() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-            } catch(e) {
-                return {};
+            let res = {};
+            // 1. Cargar base de envíos verificados
+            if (typeof BASE_ENVIADOS === 'object' && BASE_ENVIADOS !== null) {
+                for (const [id, info] of Object.entries(BASE_ENVIADOS)) {
+                    if (info && info.estado === 'enviado') {
+                        res[id] = { fecha: info.fecha || 'Enviado', bot: true };
+                    }
+                }
             }
+            // 2. Fusionar con cualquier versión de localStorage guardada en este dispositivo
+            const keys = ['crm_contactados_v5', 'crm_contactados_v4', 'crm_contactados_v3', 'crm_contactados_v2', 'crm_contactados_v1', 'crm_contactados', 'contactados'];
+            for (const k of keys) {
+                try {
+                    const raw = localStorage.getItem(k);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        if (parsed && typeof parsed === 'object') {
+                            for (const [id, val] of Object.entries(parsed)) {
+                                if (val) res[id] = val;
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+            // 3. Excluir desmarcados manualmente por el usuario
+            try {
+                const desmarcados = JSON.parse(localStorage.getItem('crm_desmarcados') || '{}');
+                for (const id of Object.keys(desmarcados)) {
+                    delete res[id];
+                }
+            } catch(e) {}
+            return res;
         }
 
         function getConfig() {
             try {
-                return JSON.parse(localStorage.getItem(CONFIG_KEY) || '{"autoMarcar": false}');
+                return JSON.parse(localStorage.getItem(CONFIG_KEY) || '{"autoMarcar": true}');
             } catch(e) {
-                return {"autoMarcar": false};
+                return {"autoMarcar": true};
             }
         }
 
         function guardarContactado(id, status) {
             const contactados = getContactados();
+            let desmarcados = {};
+            try { desmarcados = JSON.parse(localStorage.getItem('crm_desmarcados') || '{}'); } catch(e) {}
+
             if (status) {
-                contactados[id] = { fecha: new Date().toLocaleDateString('es-CL') };
+                contactados[id] = { fecha: new Date().toLocaleDateString('es-CL'), hora: new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' }) };
+                delete desmarcados[id];
             } else {
                 delete contactados[id];
+                desmarcados[id] = true;
             }
             localStorage.setItem(STORAGE_KEY, JSON.stringify(contactados));
+            localStorage.setItem('crm_desmarcados', JSON.stringify(desmarcados));
             actualizarContadores();
             renderizar();
+        }
+
+        function abrirWhatsAppDirecto(id, url) {
+            guardarContactado(id, true);
+            mostrarToast("Marcado como contactado ✓");
+            window.open(url, '_blank');
         }
 
         function actualizarContadores() {
@@ -4918,8 +5203,8 @@
                             
                             <!-- BADGE DE ESTADO -->
                             ${isContacted ? `
-                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                                    <i class="fa-solid fa-check text-[9px]"></i> Contactado
+                                <span class="bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                                    <i class="fa-solid fa-circle-check text-emerald-700 text-[10px]"></i> ENVIADO
                                 </span>
                             ` : `
                                 <span class="bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">
@@ -4949,10 +5234,10 @@
                         <!-- ACCIONES DIRECTAS WHATSAPP Y GESTIÓN -->
                         <div class="space-y-2 mt-auto pt-3 border-t border-slate-100">
                             <div class="grid grid-cols-5 gap-2">
-                                <a href="${p.whatsapp_url}" target="_blank" onclick="onAbrirWhatsApp('${p.id}')" 
-                                   class="col-span-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-2.5 px-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition">
+                                <button onclick="abrirWhatsAppDirecto('${p.id}', '${p.whatsapp_url}')" 
+                                        class="col-span-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-2.5 px-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition">
                                     <i class="fa-brands fa-whatsapp text-base"></i> Abrir WhatsApp Listo
-                                </a>
+                                </button>
                                 <button onclick="copiarMensaje('${p.id}')" title="Copiar mensaje" 
                                         class="col-span-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded-2xl flex items-center justify-center transition border border-slate-200">
                                     <i class="fa-regular fa-copy text-sm"></i>
@@ -4965,14 +5250,19 @@
                                     <button onclick="guardarContactado('${p.id}', true)" 
                                             class="w-full bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-300 active:scale-[0.98] text-slate-600 font-bold py-1.5 px-3 rounded-xl text-[11px] flex items-center justify-center gap-1.5 transition border border-slate-200">
                                         <i class="fa-solid fa-check text-emerald-600"></i>
-                                        <span>Marcar como Enviado (Mover a Contactados)</span>
+                                        <span>Marcar como Enviado (Mover a Enviados)</span>
                                     </button>
                                 ` : `
-                                    <button onclick="guardarContactado('${p.id}', false)" 
-                                            class="w-full bg-slate-100 hover:bg-red-50 hover:text-red-700 hover:border-red-300 active:scale-[0.98] text-slate-500 font-semibold py-1.5 px-3 rounded-xl text-[11px] flex items-center justify-center gap-1.5 transition border border-slate-200">
-                                        <i class="fa-solid fa-arrow-rotate-left text-slate-400"></i>
-                                        <span>Desmarcar (Volver a Por Contactar)</span>
-                                    </button>
+                                    <div class="flex items-center justify-between bg-emerald-50 border border-emerald-300 rounded-xl py-1.5 px-3">
+                                        <span class="text-[11px] font-bold text-emerald-800 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Mensaje Enviado ${contactados[p.id].fecha ? '(' + contactados[p.id].fecha + ')' : ''}
+                                        </span>
+                                        <button onclick="guardarContactado('${p.id}', false)" 
+                                                title="Mover de vuelta a Pendientes"
+                                                class="text-[10px] text-slate-500 hover:text-red-600 underline font-semibold transition shrink-0 ml-2">
+                                            Desmarcar
+                                        </button>
+                                    </div>
                                 `}
                             </div>
                         </div>
@@ -5413,9 +5703,7 @@
             if (maq === 'minimarket') {
                 urlMaqueta = "https://pagina3.github.io/muestra-minimarket/";
                 rubroNombre = "Minimarket, Abarrotes y Botillería";
-            }
-            let rubroNombre = "Minimarket, Abarrotes y Botillería";
-            if (maq === 'taller') {
+            } else if (maq === 'taller') {
                 urlMaqueta = "https://pagina3.github.io/muestra-taller/";
                 rubroNombre = "Taller Mecánico y Serviteca Automotriz";
             } else if (maq === 'restaurante') {
